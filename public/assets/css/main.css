@@ -1,6 +1,13 @@
 * {
     font-family: 'Roboto', sans-serif;
 }
+/* 
+hr {
+    height: 1px;
+    color: #28a745;
+    background-color: #28a745;
+    border: none;
+    } */
 
 .header-title {
     font-weight: bold;
@@ -22,7 +29,7 @@ h2 {
 }
 
 .active {
-    color: green;
+    color: #28a745;
 }
 
 
