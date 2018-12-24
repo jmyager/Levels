@@ -18,6 +18,7 @@
         crossorigin="anonymous">
     <link href="static/assets/css/main.css" rel="stylesheet" type="text/css" />
     <link href="static/assets/css/data.css" rel="stylesheet" type="text/css" />
+    <link href="static/assets/css/tournament.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -55,13 +56,13 @@
 
         <br>
         <button class="btn btn-success" id="filterBtn">Filter</button>
-        <button class="btn" id="refreshBtn">Refresh</button>
         <div id="filterWrapper">
             <form>
-                <p class="text-left">Filter the table view:</p>
+                <br>
+                <p class="text-left">Select parameters to filter:</p>
                 <div class="form-group">
                     <select class="form-control col" id="stateSelect">
-                        <option>Select State</option>
+                        <option class="default-option">Select State</option>
                         <option>GA</option>
                         <option>NC</option>
                         <option>SC</option>
@@ -70,7 +71,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control col" id="orgSelect">
-                        <option>Select Org</option>
+                        <option class="default-option">Select Org</option>
                         <option>Anglers</option>
                         <option>BFL</option>
                         <option>CATT</option>
@@ -80,8 +81,42 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <select class="form-control col" id="trailSelect">
+                        <option class="default-option">Select Trail</option>
+                        <option>BFCS</option>
+                        <option>Cashion</option>
+                        <option>Clarks Hill</option>
+                        <option>Coastal (SC)</option>
+                        <option>Cooper River</option>
+                        <option>East (NC)</option>
+                        <option>Hickory</option>
+                        <option>James River</option>
+                        <option>Kerr Lake</option>
+                        <option>Lake Hartwell</option>
+                        <option>Lake Wylie</option>
+                        <option>NC</option>
+                        <option>NC/SC Championship</option>
+                        <option>Norman</option>
+                        <option>Old North</option>
+                        <option>Piedmont</option>
+                        <option>Robinson</option>
+                        <option>S Carolina</option>
+                        <option>Santee Cooper</option>
+                        <option>Savannah River</option>
+                        <option>SC</option>
+                        <option>Shenandoah</option>
+                        <option>Sparkleberry</option>
+                        <option>Spring Team</option>
+                        <option>Team Trail</option>
+                        <option>Waccamaw</option>
+                        <option>Wateree</option>
+                        <option>Wateree Open</option>
+                        <option>Yadkin</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <select class="form-control col" id="locSelect">
-                        <option>Select Location</option>
+                        <option class="default-option">Select Location</option>
                         <option>Albemarle</option>
                         <option>Badin</option>
                         <option>Clarks Hill</option>
@@ -115,42 +150,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control col" id="trailSelect">
-                        <option>Select Trail</option>
-                        <option>BFCS</option>
-                        <option>Cashion</option>
-                        <option>Clarks Hill</option>
-                        <option>Coastal (SC)</option>
-                        <option>Cooper River</option>
-                        <option>East (NC)</option>
-                        <option>Hickory</option>
-                        <option>James River</option>
-                        <option>Kerr Lake</option>
-                        <option>Lake Hartwell</option>
-                        <option>Lake Wylie</option>
-                        <option>NC</option>
-                        <option>NC/SC Championship</option>
-                        <option>Norman</option>
-                        <option>Old North</option>
-                        <option>Piedmont</option>
-                        <option>Robinson</option>
-                        <option>S Carolina</option>
-                        <option>Santee Cooper</option>
-                        <option>Savannah River</option>
-                        <option>SC</option>
-                        <option>Shenandoah</option>
-                        <option>Sparkleberry</option>
-                        <option>Spring Team</option>
-                        <option>Team Trail</option>
-                        <option>Waccamaw</option>
-                        <option>Wateree</option>
-                        <option>Wateree Open</option>
-                        <option>Yadkin</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <select class="form-control col" id="rampSelect">
-                        <option>Select Ramp</option>
+                        <option class="default-option">Select Ramp</option>
                         <option>Alcoa</option>
                         <option>Black Bear</option>
                         <option>Broyles</option>
@@ -189,7 +190,18 @@
                         <option>Wildwood</option>
                     </select>
                 </div>
-                <button type="submit" class="col btn btn-success" id="filterSubmit">Filter</button>
+                <div class="form-group">
+                        <button type="submit" class="col btn-filter btn btn-success" id="filterSubmit">Filter</button>
+                </div>
+                <div class="form-group">
+                        <button type="submit" class="col btn-filter btn btn-success" id="addFilterSubmit">Add to Filter</button>
+                </div>
+                <div class="form-group">
+                        <button type="submit" class="col btn-filter btn btn-success" id="newFilterSubmit">New Filter</button>
+                </div>
+                <div class="form-group">
+                        <button type="submit" class="col btn btn-outline-success" id="clearSubmit">Clear</button>
+                </div>
             </form>
         </div>
 

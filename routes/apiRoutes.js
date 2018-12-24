@@ -24,6 +24,7 @@ var db = require("../models")();
 // ===============================================================================
 
 module.exports = function (app) {
+  var $ = require("jquery");
   var request = require("request");
   // API GET Requests
   // ---------------------------------------------------------------------------
@@ -45,7 +46,9 @@ module.exports = function (app) {
   //Route to retrieve lakes in a specific state
   app.get("/api/states/:stateInitial", function (req, res) {
     let stateInitial = req.params.stateInitial;
-    db.model("Lake").find({ state: stateInitial })
+    db.model("Lake").find({
+        state: stateInitial
+      })
       .exec(function (err, data) {
         if (err) {
           res.send("No data found for " + state);
@@ -63,8 +66,7 @@ module.exports = function (app) {
       if (error) {
         response.send(error);
         return;
-      }
-      else {
+      } else {
         response.json(data.reverse());
       }
     });
@@ -105,7 +107,7 @@ module.exports = function (app) {
               inflow: splitLine[indexes[2]],
               outflow: splitLine[indexes[3]],
               level: splitLine[indexes[4]]
-          });
+            });
 
           }
         });
@@ -124,8 +126,7 @@ module.exports = function (app) {
       if (error) {
         response.send(error);
         return;
-      }
-      else {
+      } else {
         response.json(data.reverse());
       }
     });
@@ -142,6 +143,7 @@ module.exports = function (app) {
         if (error) {
           callback(error);
         }
+
         _.each(body.split("\r\n"), function (line) {
           // Split the text body into readable lines
           var splitLine;
@@ -149,7 +151,7 @@ module.exports = function (app) {
           splitLine = line.split(/[ ]+/);
           // Check to see if this is a data line
           // Column length and first two characters must match
-          
+
           if (splitLine.length === col && !isNaN(parseInt(line.substring(0, 2)))) {
             // Loop through each cell and check for missing data
             for (var i = 0; i < splitLine.length; i++) {
@@ -167,16 +169,41 @@ module.exports = function (app) {
               inflow: splitLine[indexes[2]],
               outflow: splitLine[indexes[3]],
               level: splitLine[indexes[4]]
-          });
+            });
 
           }
         });
         callback(null, data);
       });
     }
-
-
   });
+
+  app.get("/api/cube", function (request, response) {
+    console.log("/api/cube fired");
+    // Parses our HTML and helps us find elements
+    var cheerio = require("cheerio");
+    // Makes HTTP request for HTML page
+    var request = require("request");
+
+    // Make request for cub carolinas site, returns html
+    request("http://ww2.cubecarolinas.com/lake/tabs.php", function (error, response, html) {
+
+      // Load the HTML into cheerio and save it to a variable
+      // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
+      var $ = cheerio.load(html);
+
+      var data = [];
+
+      // With cheerio, find each <td> on the page
+      // (i: iterator. element: the current element)
+      $('td').each(function() {
+        console.log($(this).text())
+        var value = $(this).text();
+        data.push(value);
+        console.log(data);
+      });
+    });
+  })
 
   // This reads the tournament file for the Tournaments Page
   app.get("/api/tournaments", function (request, response) {
@@ -191,7 +218,7 @@ module.exports = function (app) {
       var splitLine;
       line = line.trim();
       splitLine = line.split(/[\t]+/);
-      
+
       // Push each line into txData object
       txData.push({
         organizer: splitLine[indexes[0]],
@@ -203,11 +230,133 @@ module.exports = function (app) {
         txDetail: splitLine[indexes[6]],
         results: splitLine[indexes[7]],
       });
+
     });
 
-      response.json(txData);
-    
+
+    // This for loop was used to write out the tournament data that was read from a txt file
+    /*for (i = 0; i < 196; i++) {
+      if (txData[i].organizer == "CATT" && txData[i].trail == "NC/SC Championship") {
+        fs.appendFile('mynewfile2.txt', "{organizer: \"" + txData[i].organizer + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "trail: \"" + txData[i].trail + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "date: \"" + txData[i].date + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "lake: \"" + txData[i].lake + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "ramp: \"" + txData[i].ramp + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "txDetail: \"" + txData[i].txDetail + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "resultsLink: \"" + txData[i].results + "\",\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+        fs.appendFile('mynewfile2.txt', "entryLink: \"" + "\"}\r\n", function (err, file) {
+          if (err) throw err;
+          console.log("Slow me down")
+        });
+      }
+    } */
+
+
+
+    response.json(txData);
+
   });
+
+
+  // Route to retrieve TVA data
+  app.get("/api/tva", function (request, response) {
+    let tvaURL = request.query.tvaDataURL;
+    let tvaLakeName = request.query.tvaLakeName;
+
+    getData(tvaLakeName, tvaURL, function (error, data) {
+      if (error) {
+        response.send(error);
+        return;
+      } else {
+        response.json(data.reverse());
+      }
+    });
+
+    // Function to pull data
+    function getData(lakeName, newUrl, callback) {
+      var request = require("request");
+      var data = [];
+      var options = {
+        url: newUrl,
+        type: "xml"
+      }
+      request(options, function (error, response, body) {
+        if (error) {
+          callback(error);
+        }
+        let tvaDate = "";
+        let tvaTime = "";
+        let tvaElev = "";
+        let tvaOutFlow = "";
+        let tvaOutFlowStart = 0
+
+        _.each(body.split("\r\n"), function (line) {
+          // Split the text body into readable lines
+          var splitLine;
+          line = line.trim();
+          splitLine = line.split(/[ ]+/);
+
+          // Check to see if this is a data line by checking for keywords
+          if (line.substring(1, 6) == "LOCAL") {
+            // It's a date time line, save the date and time
+            // Formulate the date 
+            tvaDate = line.substring(15, 25);
+            // Formulate the time
+            if (line[34] == "<")
+              tvaTime = line.substring(25, 34);
+            else
+              tvaTime = line.substring(25, 35);
+          }
+          if (line.substring(1, 6) == "UPSTR") {
+            // It's an elevation level line, save the elevation
+            tvaElev = line.substring(18, 24)
+          }
+          if (line.substring(1, 4) == "AVG") {
+            // Last Data item
+            // Set the outFlowStart to 25 (5 char outFlow
+            tvaOutFlowStart = 25;
+            if (line.substring(24, 25) != " " && line.substring(23, 24) != " ")
+              tvaOutFlowStart = 23;
+            else if (line.substring(24, 25) != " ")
+              tvaOutFlowStart = 24;
+            tvaOutFlow = line.substring(tvaOutFlowStart, 30)
+            // Push each line into data object
+            data.push({
+              lakeName: lakeName,
+              date: tvaDate,
+              time: tvaTime,
+              outflow: tvaOutFlow,
+              level: tvaElev
+            });
+          }
+        });
+        callback(null, data);
+      });
+    }
+  });
+
+
 
 
   // API POST Requests
@@ -217,9 +366,14 @@ module.exports = function (app) {
   app.post("/api/usgs", (req, res) => {
     console.log("nameID: " + req.body.nameID)
     req.body.newBatch.forEach(function (e) {
-      db.model('Lake').updateOne(
-        { _id: ObjectId(req.body.nameID), data: [{ level: e.value, date: e.date, time: e.time }] }
-      )
+      db.model('Lake').updateOne({
+          _id: ObjectId(req.body.nameID),
+          data: [{
+            level: e.value,
+            date: e.date,
+            time: e.time
+          }]
+        })
         .then(function (data) {
           res.json(data);
         })
@@ -228,4 +382,39 @@ module.exports = function (app) {
         });
     })
   });
-};
+  //Start of dukeData
+  // Route to retrieve DUKE data
+  app.get("/api/duke", function (request, response) {
+    let dukeURL = request.query.dukeDataURL;
+    let dukeLakeName = request.query.dukeLakeName;
+
+    getData(dukeLakeName, dukeURL, function (error, data) {
+      if (error) {
+        response.send(error);
+        return;
+      } else {
+        response.json(data.reverse());
+      }
+    });
+
+    // Function to pull data
+    function getData(lakeName, newUrl, callback) {
+      var request = require("request");
+      var data = [];
+      var options = {
+        url: newUrl,
+        type: "xml"
+      }
+      request(options, function (error, response, body) {
+        if (error) {
+          callback(error);
+        }
+        let dukeLakes = JSON.parse(body);
+
+        callback(null, dukeLakes);
+      });
+    }
+  });
+
+  //End of dukeData
+}; // End of module.exports

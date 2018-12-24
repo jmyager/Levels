@@ -1,11 +1,13 @@
 var txBatch = [];
 var currentBatch = [];
+let parameterArray = [];
 let orgSort = false;
 let trailSort = false;
 let dateSort = false;
 let locSort = false;
 let rampSort = false;
 let stateSort = false;
+let filtered = false;
 
 function displayData(data) {
     $("#txSection").empty();
@@ -46,14 +48,14 @@ var sort_by = function (field, reverse, primer) {
 
 // API call for tx data for Filtering Tournaments
 $.ajax({
-    url: "/api/tournaments",
-    method: "GET",
-})
+        url: "/api/tournaments",
+        method: "GET",
+    })
     .then(function (data) {
         console.log(data);
         txBatch = data;
         currentBatch = txBatch;
-        displayData(currentBatch);
+        displayData(txBatch);
     });
 
 
@@ -125,17 +127,22 @@ $('#headerRow').on('click', 'th', function () {
 
 // Filter data Code Below
 
-$("#refreshBtn").on("click", function () {
+$("#clearSubmit").on("click", function (e) {
+    e.preventDefault();
+    // Reset the page and data
+    $("#filterSubmit").show();
+    $("#addFilterSubmit").hide();
+    $("#newFilterSubmit").hide();
     currentBatch = txBatch;
-    displayData(currentBatch);
+    displayData(txBatch);
+    $("#filterWrapper").toggle();
+    filtered = false;
+    filteredTags = [];
 })
 
 // Define generic filter function
 function filterData(batch, category, val, callback) {
     // let filteredBatch = batch.filter(e => e[category] === val);
-    console.log(category);
-    console.log(val);
-    console.log(batch[0].category);
     let filteredBatch = batch.filter(e => e[category].indexOf(val) !== -1);
     callback(filteredBatch);
 }
@@ -146,11 +153,25 @@ $("#filterBtn").on("click", function () {
     $("#filterWrapper").toggle();
 })
 
+// Hide additional buttons until first filter has occurred
+$("#addFilterSubmit").hide();
+$("#newFilterSubmit").hide();
+
+$("#newFilterSubmit").on("click", function (e) {
+    e.preventDefault();
+    filtered = false;
+    currentBatch = [];
+    filteredTags = [];
+})
+
 
 // Form submit capture
-$("#filterSubmit").on("click", function (e) {
+$(".btn-filter").on("click", function (e) {
     e.preventDefault();
     $("#filterWrapper").toggle();
+    $("#filterSubmit").hide();
+    $("#addFilterSubmit").show();
+    $("#newFilterSubmit").show();
     let orgSelect = $("#orgSelect").val();
     let locSelect = $("#locSelect").val();
     let trailSelect = $("#trailSelect").val();
@@ -184,14 +205,77 @@ $("#filterSubmit").on("click", function (e) {
     }
 
     if (stateSelect !== "Select State") {
-        console.log('stateSelect', stateSelect);
         filterData(filteredBatch, "state", stateSelect, function (newFilteredBatch) {
             filteredBatch = newFilteredBatch;
-            console.log('State', filteredBatch);
         });
     }
 
-    // Change our working batch holder and display the new filtered data;
-    currentBatch = filteredBatch;
-    displayData(filteredBatch);
+    if (filtered === true) {
+        console.log("true fired");
+        // Change our working batch holder and display the new filtered data;
+        for (var i = 0; i < filteredBatch.length; i++) {
+            currentBatch.push(filteredBatch[i]);
+        }
+        displayData(currentBatch);
+    } else {
+        displayData(filteredBatch);
+        currentBatch = filteredBatch;
+        filtered = true;
+    }
+    // Reset the option field to the default (ex: "Select Org")
+    $(".default-option").prop({selected: true});
 });
+
+// // Function to create Parameter buttons inside parameter-well. Function is called after Add button function
+// function createParameterBtns () {
+//     for (var i = 0; i < parameterArray.length; i++) {
+//         var parameterSpan = $("<span>" + parameterArray[i] + "</span>");
+//         parameterSpan.addClass("parameter");
+//         parameterSpan.attr("id", "pr-" + parameterArray[i]);
+//         $("#parameterWell").append(parameterSpan);
+//     }
+// }
+
+
+// // Function to save parameters when Add button is clicked
+// $("#filterAdd").on("click", function(e) {
+//     e.preventDefault();
+//     let orgSelect = $("#orgSelect").val();
+//     let locSelect = $("#locSelect").val();
+//     let trailSelect = $("#trailSelect").val();
+//     let rampSelect = $("#rampSelect").val();
+//     let stateSelect = $("#stateSelect").val();
+
+//     // If parameter has been selected, add it to our parameter array
+//     // Run the necessary filter functions
+//     if (orgSelect !== "Select Org") {
+//         parameterArray.push(orgSelect);
+//     }
+
+//     if (locSelect !== "Select Location") {
+//         parameterArray.push(locSelect);
+//     }
+
+//     if (trailSelect !== "Select Trail") {
+//         parameterArray.push(trailSelect);
+//     }
+
+//     if (rampSelect !== "Select Ramp") {
+//         parameterArray.push(rampSelect);
+//     }
+
+//     if (stateSelect !== "Select State") {
+//         parameterArray.push(stateSelect);
+//     }
+
+//     createParameterBtns();
+// })
+
+
+// // Clear all filter parameters
+// $("#filterClear").on("click", function(e) {
+//     e.preventDefault();
+//     parameterArray = [];
+//     $("#parameterWell").empty();
+//     createParameterBtns();
+// })
