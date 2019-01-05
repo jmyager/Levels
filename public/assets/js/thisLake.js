@@ -428,14 +428,19 @@ function dataDuke(data) {
         }
     })
         .then(function (data) {
-            console.log(lakeRoute)
             // adjust the elev for lakes with data relative to full pool (not from sealevel))
 
             let skipToValidData = 0;
 
-            while (isNaN(data[skipToValidData].Average)) {
+            // Duke updates their text file with future datas sometimes
+            // While date is ahead of today's date, continue to loop forward
+            var now = new Date();
+            var dataDate = new Date(data[skipToValidData].Date);
+            while (dataDate > now) {
                 skipToValidData++;
+                dataDate = new Date(data[skipToValidData].Date);
             }
+            
             if (seaLevelDelta !== 0)
                 elevationAdjust = (parseFloat(data[skipToValidData].Average) + seaLevelDelta).toFixed(2);
             else {
