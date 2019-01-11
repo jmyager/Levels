@@ -5,7 +5,7 @@ var express = require("express"),
   _ = require("underscore"),
   fs = require('fs');
 
-var txData = [];
+// var txData = [];
 
 // Require all models
 var db = require("../models")();
@@ -44,18 +44,17 @@ module.exports = function (app) {
 
 
   //Route to retrieve lakes in a specific state
-  app.get("/api/states/:stateInitial", function (req, res) {
-    let stateInitial = req.params.stateInitial;
-    db.model("Lake").find({
-      state: stateInitial
-    })
-      .exec(function (err, data) {
-        if (err) {
-          res.send("No data found for " + state);
-        } else {
-          res.json(data);
-        }
-      })
+  app.get("/api/states/:state", function (req, res) {
+    var data = require("../data/lakeData");
+    let state = req.query.state;
+    var stateObj = data.find(e => e.state === state);
+    res.send(stateObj);
+  })
+
+  app.get("/api/lake-data", function(req,res) {
+    // Import lake data from lakeData.js
+    var data = require("../data/lakeData");
+    res.json(data);
   })
 
   // Route to retrieve ACE data for Kerr Lake
@@ -195,19 +194,16 @@ module.exports = function (app) {
 
     function scrapeCubeData(callback) {
       // Define our data template
-      var data = [
-        {
-          lakeName: "High Rock",
-          data: []
-        }, {
-          lakeName: "Badin",
-          data: []
-        }, {
-          lakeName: "Tuckertown",
-          data: []
-        }
-      ];
-
+      var data = [{
+        lakeName: "High Rock",
+        data: []
+      }, {
+        lakeName: "Badin",
+        data: []
+      }, {
+        lakeName: "Tuckertown",
+        data: []
+      }];
       // Make request for cub carolinas site, returns html
       request("http://ww2.cubecarolinas.com/lake/tabs.php", function (error, response, html) {
 
@@ -227,19 +223,28 @@ module.exports = function (app) {
             if (value.substring(0, 1) === "H") {
               date = value.substring(9, 19);
               elev = value.substring(19, 25);
-              data[0].data.push({ date: date, elev: elev });
+              data[0].data.push({
+                date: date,
+                elev: elev
+              });
             }
             // If the current value is Badin
             if (value.substring(0, 1) === "B") {
               date = value.substring(15, 25);
               elev = value.substring(25, 31);
-              data[1].data.push({ date: date, elev: elev });
+              data[1].data.push({
+                date: date,
+                elev: elev
+              });
             }
             // If Tuckertown
             if (value.substring(0, 1) === "T") {
               date = value.substring(10, 20);
               elev = value.substring(20, 26);
-              data[2].data.push({ date: date, elev: elev });
+              data[2].data.push({
+                date: date,
+                elev: elev
+              });
             }
           }
         });
@@ -248,74 +253,32 @@ module.exports = function (app) {
     }
   })
 
-  // This reads the tournament file for the Tournaments Page
-  app.get("/api/tournaments", function (request, response) {
 
-    var contents = fs.readFileSync('data/tournamentList.txt', 'ascii');
+  // Route to retrieve ACE data from A2W
+  app.get("/api/a2w", function (request, response) {
+    let a2wURL = request.query.a2wURL;
 
-    var indexes = [0, 1, 2, 3, 4, 5, 6, 7]
-    txData = [];
-
-    _.each(contents.split("\n"), function (line) {
-      // Split the text body into readable lines
-      var splitLine;
-      line = line.trim();
-      splitLine = line.split(/[\t]+/);
-
-      // Push each line into txData object
-      txData.push({
-        organizer: splitLine[indexes[0]],
-        trail: splitLine[indexes[1]],
-        date: splitLine[indexes[2]],
-        lake: splitLine[indexes[3]],
-        ramp: splitLine[indexes[4]],
-        state: splitLine[indexes[5]],
-        txDetail: splitLine[indexes[6]],
-        results: splitLine[indexes[7]],
-      });
+    getData(a2wURL, function (error, data) {
+      if (error) {
+        response.send(error);
+        return;
+      } else {
+        response.json(data);
+      }
     });
 
-
-    // This for loop was used to write out the tournament data that was read from a txt file
-    /*for (i = 0; i < 196; i++) {
-      if (txData[i].organizer == "CATT" && txData[i].trail == "NC/SC Championship") {
-        fs.appendFile('mynewfile2.txt', "{organizer: \"" + txData[i].organizer + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "trail: \"" + txData[i].trail + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "date: \"" + txData[i].date + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "lake: \"" + txData[i].lake + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "ramp: \"" + txData[i].ramp + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "txDetail: \"" + txData[i].txDetail + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "resultsLink: \"" + txData[i].results + "\",\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-        fs.appendFile('mynewfile2.txt', "entryLink: \"" + "\"}\r\n", function (err, file) {
-          if (err) throw err;
-          console.log("Slow me down")
-        });
-      }
-    } */
-    response.json(txData);
-  });
-
+    function getData(a2wURL, callback) {
+      var request = require("request");
+      var data = [];
+      request(a2wURL, function (error, response, body) {
+        if (error) {
+          callback(error);
+        }
+        data = JSON.parse(body);
+        callback(null, data);
+      })
+    }
+  })
 
   // Route to retrieve TVA data
   app.get("/api/tva", function (request, response) {
@@ -359,17 +322,16 @@ module.exports = function (app) {
           if (line.substring(1, 6) == "LOCAL") {
             // It's a date time line, save the date and time
             // Formulate the date 
-            tvaDate = line.substring(15, 25);
+            tvaDate = splitLine[0].substr(15, 9);
             // Formulate the time
-            if (line[34] == "<")
-              tvaTime = line.substring(25, 34);
-            else
-              tvaTime = line.substring(25, 35);
+            tvaTime = splitLine[1] + " " + splitLine[2] + " " + splitLine[3].substr(0, 3);
           }
+
           if (line.substring(1, 6) == "UPSTR") {
             // It's an elevation level line, save the elevation
             tvaElev = line.substring(18, 24)
           }
+          
           if (line.substring(1, 4) == "AVG") {
             // Last Data item
             // Set the outFlowStart to 25 (5 char outFlow
@@ -393,6 +355,118 @@ module.exports = function (app) {
       });
     }
   });
+
+  app.get("/api/alabama", function (request, response) {
+    var lakeRoute = request.query.lakeRoute;
+    // Parses our HTML and helps us find elements
+    var cheerio = require("cheerio");
+    // Makes HTTP request for HTML page
+    var request = require("request");
+
+    scrapeAlabData(lakeRoute, function (error, data) {
+      if (error) {
+        response.send(error);
+        return;
+      } else {
+        response.json(data);
+      }
+    });
+
+    function scrapeAlabData(lakeRoute, callback) {
+      // Set the base of the request depending on which lake we want
+      var url = "";
+      switch (lakeRoute) {
+        case "smith":
+          url = "http://www.smithlake.info/Level/Calendar"
+          break;
+
+        case "neelyhenry":
+          url = "http://www.neelyhenry.uslakes.info/Level/Calendar"
+          break;
+
+        case "loganmartin":
+          url = "http://www.loganmartin.info/Level/Calendar"
+          break;
+
+        case "lay":
+          url = "http://www.laylake.info/Level/Calendar"
+          break;
+
+        case "weiss":
+          url = "http://www.lakeweiss.info/Level/Calendar"
+          break;
+      }
+
+      // Get today's date to build request url
+      var today = new Date();
+      var mm = ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1); //Fancy conversion because .getMonth() will return numbers 0-12, but we need two digits months to build url
+      var yyyy = today.getFullYear();
+      var date = "/" + yyyy + "/" + mm;
+
+      // Define and build previous month's date for second scrape
+      var yyyy2 = "";
+      var mm2 = "";
+      if (mm === "01") {
+        mm2 = "12"
+        yyyy2 = today.getFullYear() - 1;
+        date2 = "/" + yyyy2 + "/" + mm2;
+      } else {
+        yyyy2 = today.getFullYear();
+        var mm2 = (((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1) - 1); // Same fancy conversion except -1 added on the end to get previous month
+        var date2 = "/" + yyyy2 + "/" + mm2;
+      }
+
+      // Define our data template
+      var data = []
+
+      // Make request for previous months lakelevels.info site, returns html
+      request(url + date2, function (error, response, html) {
+
+        // Load the HTML into cheerio and save it to a variable
+        var $ = cheerio.load(html);
+        // Simple day increment counter to build date later
+        var dd = 1;
+        // With cheerio, find each <td> on the page
+        // (i: iterator. element: the current element)
+        $("font").each(function (i, element) {
+          var value = $(element).text();
+          if (!isNaN(value) && value.length === 5) {
+            data.unshift({
+              date: dd + "/" + mm2 + "/" + yyyy2,
+              time: "6:00",
+              elev: value,
+              flow: "N/A"
+            });
+            dd++;
+          }
+        })
+
+        // Make second request for current month's lakelevels.info site
+        request(url + date, function (error, response, html) {
+
+          // Load the HTML into cheerio and save it to a variable
+          var $ = cheerio.load(html);
+          // Simple day increment counter to build date later
+          var dd = 1;
+          // With cheerio, find each <td> on the page
+          // (i: iterator. element: the current element)
+          $("font").each(function (i, element) {
+            var value = $(element).text();
+            if (!isNaN(value) && value.length === 5) {
+              data.unshift({
+                date: dd + "/" + mm + "/" + yyyy,
+                time: "6:00",
+                elev: value,
+                flow: "N/A"
+              });
+              dd++;
+            }
+          })
+          callback(null, data);
+        });
+      });
+    }
+  })
 
 
 
@@ -457,4 +531,36 @@ module.exports = function (app) {
   });
 
   //End of dukeData
+
+
+  // This reads the tournament file for the Tournaments Page
+  app.get("/api/tournaments", function (request, response) {
+    // Import our txData from tournamentData.js file
+    var txData = require("../data/tournamentData");
+    // Declare array to hold our data to send back to the client
+    let data = [];
+    // Loop through the high level organizations in our data
+    for (var i = 0; i < txData.length; i++) {
+      var org = txData[i];
+      // Loop through the tournaments within each organization
+      for (var k = 0; k < org.tournaments.length; k++) {
+        var e = org.tournaments[k];
+        // Push each line into output data object
+        data.push({
+          organizer: e.organizer,
+          trail: e.trail,
+          date: e.date,
+          lake: e.lake,
+          ramp: e.ramp,
+          state: e.state,
+          txDetail: e.txDetail,
+          results: e.resultsLink
+        });
+      };
+    };
+    response.json(data);
+
+
+  });
+
 }; // End of module.exports
