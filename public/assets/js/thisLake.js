@@ -23,6 +23,10 @@ let displayBatch = [];
 // Variables to hold our ad images and urls
 let adLogoSrc = "";
 let adLogoUrl = "";
+let adTxSrc = "";
+let adTxUrl = "";
+let adCharitySrc = "";
+let adCharityUrl = "";
 
 // Counter variable for flowUSGS to use to sync time with elevUSGS
 let k = 0;
@@ -424,7 +428,7 @@ function dataDuke(callback) {
 
             // Set date, time and elev
             currentDate = data[skipToValidData].Date;
-            currentTime = "6:00"; // No time is provided by source
+            currentTime = "06:00"; // No time is provided by source
             currentElev = elevationAdjust;
             currentDelta = (elevationAdjust - lakePool).toFixed(2);
 
@@ -445,7 +449,7 @@ function dataDuke(callback) {
 
                 displayBatch.push({
                     date: date,
-                    time: "6:00",
+                    time: "06:00",
                     elev: elev,
                     flow: flow
                 })
@@ -517,7 +521,9 @@ function loadAds() {
     }
     if (typeof adTxSrc !== 'undefined') {
         $("#adTxWell").append("<a href='" + adTxUrl + "' target='_blank'><img class='ad-logo' src='" + adTxSrc + "'/></a>");
-
+    }
+    if (typeof adCharitySrc !== 'undefined') {
+        $("#adCharityWell").append("<a href='" + adCharityUrl + "' target='_blank'><img class='ad-logo' src='" + adCharitySrc + "'/></a>");
     }
 }
 
@@ -555,6 +561,8 @@ $.ajax({
         adLogoUrl = currentLake.adLogoUrl;
         adTxSrc = currentLake.adTxSrc;
         adTxUrl = currentLake.adTxUrl;
+        adCharitySrc = currentLake.adCharitySrc;
+        adCharityUrl = currentLake.adCharityUrl;
 
         // Loop through the lake data sources and run associated functions
         for (var i = 0; i < currentLake.dataSource.length; i++) {
