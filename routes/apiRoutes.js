@@ -52,11 +52,16 @@ module.exports = function (app) {
   })
 
   // Route to retrieve lakeData.js
-  app.get("/api/lake-data", function(req,res) {
+  app.get("/api/lake-data", function (req, res) {
     // Import lake data from lakeData.js
     var data = require("../data/lakeData");
     res.json(data);
   })
+
+  /***************************************************************************************************************************************** */
+
+  // I don't think this is required now that we have A2W
+
 
   // Route to retrieve ACE data for Kerr Lake
   app.get("/api/kerr", function (request, response) {
@@ -118,6 +123,10 @@ module.exports = function (app) {
 
   });
 
+  /***************************************************************************************************************************************** */
+
+  // I don't think this is required now that we have A2W
+
   // Route to retrieve ACE data for Jordan Lake
   app.get("/api/jordan", function (request, response) {
     var url = "http://epec.saw.usace.army.mil/dssjord.txt";
@@ -178,6 +187,8 @@ module.exports = function (app) {
     }
   });
 
+
+  /***************************************************************************************************************************************** */
   // Route to retrieve data for cube carolinas
   app.get("/api/cube", function (request, response) {
     // Parses our HTML and helps us find elements
@@ -255,6 +266,8 @@ module.exports = function (app) {
     }
   })
 
+
+  /***************************************************************************************************************************************** */
   // Route to retrieve ACE data from A2W
   app.get("/api/a2w", function (request, response) {
     let a2wURL = request.query.a2wURL;
@@ -281,6 +294,8 @@ module.exports = function (app) {
     }
   })
 
+
+  /***************************************************************************************************************************************** */
   // Route to retrieve TVA data
   app.get("/api/tva", function (request, response) {
     let tvaURL = request.query.tvaDataURL;
@@ -332,7 +347,7 @@ module.exports = function (app) {
             // It's an elevation level line, save the elevation
             tvaElev = line.substring(18, 24)
           }
-          
+
           if (line.substring(1, 4) == "AVG") {
             // Last Data item
             // Set the outFlowStart to 25 (5 char outFlow
@@ -357,6 +372,7 @@ module.exports = function (app) {
     }
   });
 
+  /***************************************************************************************************************************************** */
   app.get("/api/alabama", function (request, response) {
     var lakeRoute = request.query.lakeRoute;
     // Parses our HTML and helps us find elements
@@ -394,10 +410,6 @@ module.exports = function (app) {
 
         case "lay":
           url = "http://www.laylake.info/Level/Calendar"
-          break;
-
-        case "rossbarnett":
-          url = "http://www.rossbarnett.uslakes.info/Level/Calendar"
           break;
 
         case "weiss":
@@ -463,7 +475,7 @@ module.exports = function (app) {
             if (!isNaN(value) && value.length === 5) {
               data.unshift({
                 date: dd + "/" + mm + "/" + yyyy,
-                time: "6:00",
+                time: "06:00",
                 elev: value,
                 flow: "N/A"
               });
@@ -504,6 +516,7 @@ module.exports = function (app) {
   // });
 
 
+  /***************************************************************************************************************************************** */
   //Start of dukeData
   // Route to retrieve DUKE data
   app.get("/api/duke", function (request, response) {
@@ -540,32 +553,120 @@ module.exports = function (app) {
 
   //End of dukeData
 
+  /***************************************************************************************************************************************** */
 
+  // Route to retrieveSJRWMD data
+  app.get("/api/sjrwmd", function (request, response) {
+    let sjrwmdURL = request.query.sjrwmdDataURL;
+    let sjrwmdLakeName = request.query.sjrwmdLakeName;
+
+    getData(sjrwmdLakeName, sjrwmdURL, function (error, data) {
+      if (error) {
+        response.send(error);
+        return;
+      } else {
+        response.json(data);
+      }
+    });
+
+    // Function to pull data
+    function getData(lakeName, newUrl, callback) {
+      var request = require("request");
+      var data = [];
+
+      var options = {
+        url: newUrl
+      }
+      request(options, function (error, response, body) {
+        if (error) {
+          callback(error);
+        }
+        let j = body.length - 15;
+        j++;
+        // Get the most recent 30 days data
+        for (i = 0; i < 30; i++) {
+          // find next end of row
+          for (j = j - 5; body.substr(j, 5) !== "</tr>"; j--) {}
+
+          data.push({
+            lakeName: lakeName,
+            date: body.substr(j - 116, 10),
+            time: body.substr(j - 97, 8),
+            inflow: "N/A",
+            outflow: "N/A",
+            level: body.substr(j - 77, 5),
+          });
+          j--;
+        };
+
+        callback(null, data);
+      });
+    }
+
+
+  });
+
+  /***************************************************************************************************************************************** */
+
+  // Route to retrieve TWDB data
+  app.get("/api/twdb", function (request, response) {
+    let twdbURL = request.query.twdbDataURL;
+    let twdbLakeName = request.query.twdbLakeName;
+
+    getData(twdbLakeName, twdbURL, function (error, data) {
+      if (error) {
+        response.send(error);
+        return;
+      } else {
+        response.json(data);
+      }
+    });
+
+    // Function to pull data
+    function getData(lakeName, newUrl, callback) {
+      var request = require("request");
+      var data = [];
+
+      var options = {
+        url: newUrl
+      }
+      request(options, function (error, response, body) {
+        if (error) {
+          callback(error);
+        }
+        _.each(body.split("\r\n"), function (line) {
+          // Split the text body into readable lines
+          var splitLine;
+          line = line.trim();
+          // Check to see if this is a data line
+          if (!isNaN(line[0])) {
+            splitLine = line.split(/[,]+/);  // split the line
+            // Index 0=date, 1=elevation, there is no flow or time
+
+            // Push each line into data object
+            data.push({
+              lakeName: lakeName,
+              date: splitLine[0],
+              time: "06:00",
+              inflow: "N/A",
+              outflow: "N/A",
+              level: splitLine[1]
+            });
+          }
+        });
+        callback(null, data.reverse()); // reverse the data 
+      });
+    }
+
+
+  });
+
+  /***************************************************************************************************************************************** */
   // This reads the tournament file for the Tournaments Page
   app.get("/api/tournaments", function (request, response) {
     // Import our txData from tournamentData.js file
     var txData = require("../data/tournamentData");
-    /*// Declare array to hold our data to send back to the client
-    let data = [];
-    // Loop through the high level organizations in our data
-    for (var i = 0; i < txData.length; i++) {
-      var org = txData[i];
-      // Loop through the tournaments within each organization
-      for (var k = 0; k < org.tournaments.length; k++) {
-        var e = org.tournaments[k];
-        // Push each line into output data object
-        data.push({
-          organizer: e.organizer,
-          trail: e.trail,
-          date: e.date,
-          lake: e.lake,
-          ramp: e.ramp,
-          state: e.state,
-          txDetail: e.txDetail,
-          results: e.resultsLink
-        });
-      };
-    };*/
+
     response.json(txData);
 
 

@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
     <link href="static/assets/css/main.css" rel="stylesheet" type="text/css" />
     <link href="static/assets/css/data.css" rel="stylesheet" type="text/css" />
     <link href="static/assets/css/tournament.css" rel="stylesheet" type="text/css" />
@@ -43,6 +45,11 @@
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
             </ul>
+            <div class="navbar-nav ml-auto social-navItem">
+                <a href="https://www.facebook.com/BassSavvy/" target="_blank">
+                    Follow us on social! <i class="fab fa-facebook fa-lg"></i>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -57,7 +64,9 @@
         </a>
         <hr>
 
-        <button class="btn btn-success" id="filterBtn">Filter</button>
+        <h6><b>Using the Filter Feature </b></h6>
+        <p>Click the filter button below to filter out the tournaments you'd like to see. Clicking "Add to Filter" will add a new selection to your current selection. Clicking "New Filter" will reset your query entirely. Clicking "Clear" will reset all data. Clicking on a table header will sort that column alphabetically.</p>
+        <button class="btn btn-success filter-btn" id="filterBtn">Filter</button>
         <div id="filterWrapper">
             <form>
                 <br>
@@ -102,7 +111,6 @@
             </form>
         </div>
 
-        <p>* Click on a table header to sort</p>
         <div class="table-responsive text-center">
             <table id="txTable" class="table table-fixed table-striped">
                 <thead class="sticky-top">
