@@ -141,14 +141,15 @@ function buildElevChart(data) {
             }
         }
     });
-    console.log(data[0].flow);
-    if (data[0].flow !== "N/A" && typeof data[0].flow !== 'undefined') {
-        buildFlowChart(data);
-    }
+    // console.log(data[0].flow);
+    // if (data[0].flow !== "N/A" && typeof data[0].flow !== 'undefined') {
+    //     buildFlowChart(data);
+    // }
 }
 
 // Function to build flow chart on page
 function buildFlowChart(data) {
+    console.log(data);
     $("#flowChart").show();
     // Our data must be parsed into separate flat arrays for the chart
     let labelBatch = [];
@@ -163,6 +164,8 @@ function buildFlowChart(data) {
             break;
         }
     }
+    console.log(labelBatch);
+    console.log(dataFlowBatch);
     labelBatch.reverse();
     dataFlowBatch.reverse();
     var ctx = document.getElementById('myFlowChart').getContext('2d');
