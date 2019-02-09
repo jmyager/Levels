@@ -35,12 +35,12 @@ Before BassSavvy, fishermen had to visit several different, very dated websites 
 * Tournament scheduling feature
 
 
-## Demo
+## Test Site
 The test site with the most up to date code can be located here:
 * [Github Repository](https://github.com/jmyager/Levels-Test)
 * [Heroku hosted test site](https://guarded-plains-88685.herokuapp.com/)
 
-## Live
+## Live Site
 The full site can be located here:
 * [Github Repository](https://github.com/jmyager/Levels)
 * [Live Website](http://www.basssavvy.com/)
