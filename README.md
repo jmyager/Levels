@@ -1,5 +1,5 @@
 # Levels (BassSavvy.com)
-BassSavvy is a fullstack web application built for fishermen by fishermen. BassSavvy aggregates lake level and bass fishing tournaments into one convenient place for fishermen to view.
+BassSavvy is a fullstack web application built for fishermen by fishermen. BassSavvy aggregates lake levels and bass fishing tournaments into one convenient place for fishermen to view.
 
 ## Technologies
 - JavaScript
