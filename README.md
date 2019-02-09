@@ -24,6 +24,9 @@ Before BassSavvy, fishermen had to visit several different, very dated websites 
 * Once data is obtained from the source, it is formatted and displayed for the user in different views and tables.
 * All states, lakes, and tournaments are dynamically created for the user based on their respective json file and values.
 
+## Challenges
+Our greatest challenge (and what continues to be challenging) is sourcing the lake level data. Because we are sourcing data from a variety of locations, once received we must format it to work consistently with our application. Additionally, the sources we rely heavily on are not consistent with their data output. Different sources output different data structures, values, types and at inconsistent intervals (hourly, 15 minutes, etc.). On top of this, said sources lack sufficient documentation and can be prone to downtime. All of these issues we must take into consideration for each and every unique lake, which has proven to become a very difficult and complex task - even though the resulting output for the user may seem very simple at first glance.
+
 ## Future Plans
 * Implement a database to replace our current json data files
 * Permanently store lake level data
