@@ -179,10 +179,15 @@ h1, h2, h3 {
     margin-bottom: 10px;
 }
 
+#adLogoWell {
+    height: auto;
+    margin-bottom: 10px;
+}
+
 .current-wrapper {
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: #4CAF50;
     background-image: linear-gradient(hsl(112, 39%, 49%), hsl(137, 43%, 39%));
     color: white;
@@ -285,7 +290,7 @@ h1, h2, h3 {
 
 footer {
     height: 70px;
-    opacity: 0; /*Remove this style to reveal footer */
+    /* opacity: 0; Remove this style to reveal footer */
 }
 
 .fa-window-close {
@@ -307,7 +312,7 @@ footer {
 */
 
 #slides {
-    /* opacity: 0; Remove this style to unhide */
+     opacity: 0; /*Remove this style to unhide */
     position: relative;
     height: auto;
     width: auto;
