@@ -292,6 +292,13 @@ module.exports = function (app) {
           callback(error);
         };
 
+        // if statement added for bug
+        if (body.includes("503 Service Temporarily Unavailable")) {
+          data = "Data service temporarily unavailable. Please check back later";
+          callback(null, data);
+        }
+        else {
+
         data = JSON.parse(body);
 
         // Insert data processing code from thisLake.js here
@@ -487,6 +494,7 @@ module.exports = function (app) {
         // End of data processing code from thisLake.js
 
         callback(null, displayBatch.reverse());
+      }
       })
     }
     // Date Conversion functions from thisLake.js

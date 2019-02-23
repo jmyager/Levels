@@ -357,6 +357,12 @@ function dataACE(callback) {
         .then(function (data) {
             console.log(data);
 
+            // if statement added for bug when A2W is down
+            if (data.includes("Data service temporarily unavailable. Please check back later")) {
+                currentLake.bodyOfWater = currentLake.bodyOfWater + " <br><h3>Water Level sensor down, try again later or report this outage.</h3>";
+            }
+            else {
+
             // Check to see that ACE returned data
             if (data.length > 0) {
                 displayBatch = data;
@@ -370,6 +376,7 @@ function dataACE(callback) {
                 currentLake.bodyOfWater = currentLake.bodyOfWater + " <br> Water Level sensor down, try again later or report this outage";
 
             callback(null, displayBatch);
+        }
         })
 }
 
