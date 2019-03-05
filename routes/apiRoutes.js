@@ -299,206 +299,208 @@ module.exports = function (app) {
         }
         else {
 
-        data = JSON.parse(body);
+          data = JSON.parse(body);
 
-        // Insert data processing code from thisLake.js here
+          // Insert data processing code from thisLake.js here
 
-        console.log("ACE Call");
-        console.log(data);
+          console.log("ACE Call");
+          console.log(data);
 
-        let ACEFlow = false;
-        let ACEFlowIndex = -1;
-        let ACEElevIndex = 0;
-        let ACEElevNum = 0;
-        let ACEFlowNum = 0;
-        let exceptionLake = false;
+          let ACEFlow = false;
+          let ACEFlowIndex = -1;
+          let ACEElevIndex = 0;
+          let ACEElevNum = 0;
+          let ACEFlowNum = 0;
+          let exceptionLake = false;
 
-        // clear displayBatch
-        displayBatch = [];
+          // clear displayBatch
+          displayBatch = [];
 
-        //see if A2W is returning Elev Data
-        if (typeof data[0].Elev !== 'undefined') {
+          //see if A2W is returning Elev Data
+          if (typeof data[0].Elev !== 'undefined') {
 
-          // default value of ACEFlow is false, indicating ACE has no Flow Data included
-          // default value of ACEFlowIndex is -1, indicating
-          // Sometimes OutFlow is index 1, sometimes it's index 2, or 3
-          // And then there is Ross Barnett, that doesn't have flow and only has 3 in the array!
+            // default value of ACEFlow is false, indicating ACE has no Flow Data included
+            // default value of ACEFlowIndex is -1, indicating
+            // Sometimes OutFlow is index 1, sometimes it's index 2, or 3
+            // And then there is Ross Barnett, that doesn't have flow and only has 3 in the array!
 
-          // Automating the AceFlowIndex value identification code to automatically determine based on data (Fix the Ace Outflow problem)
-          let aa = 0
-          while (aa < data.length && typeof data[aa].Outflow == 'undefined') {
-            AceFlowIndex = aa;
-            aa++;
-          }
-          if (aa < data.length && aa > 0) {
-            ACEFlow = true;
-            ACEFlowIndex = aa;
-          } else exceptionLake = true;
+            // Automating the AceFlowIndex value identification code to automatically determine based on data (Fix the Ace Outflow problem)
+            let aa = 0
+            while (aa < data.length && typeof data[aa].Outflow == 'undefined') {
+              AceFlowIndex = aa;
+              aa++;
+            }
+            if (aa < data.length && aa > 0) {
+              ACEFlow = true;
+              ACEFlowIndex = aa;
+            } else exceptionLake = true;
 
-          let firstDate = data[ACEElevIndex].Elev[0].time.split(" ");
-          let secondDate = data[ACEElevIndex].Elev[1].time.split(" ");
-          let dailyACEData = firstDate[1] === secondDate[1]; // default value, this is for when ACE only returns daily readings vs hourly
-          let isLakeIstokpoga = currentLake.bodyOfWater == 'Istokpoga'; // default value, this is when the ACE data is Fucked Up like Istokpoga in Florida, Damn...
+            let firstDate = data[ACEElevIndex].Elev[0].time.split(" ");
+            let secondDate = data[ACEElevIndex].Elev[1].time.split(" ");
+            let dailyACEData = firstDate[1] === secondDate[1]; // default value, this is for when ACE only returns daily readings vs hourly
+            let isLakeIstokpoga = currentLake.bodyOfWater == 'Istokpoga'; // default value, this is when the ACE data is Fucked Up like Istokpoga in Florida, Damn...
 
-          // These have 120 elev data and 5 Flow, ignore flow data
-          if (['Truman', 'Pomme De Terre', "Stockton", "Rend", ].includes(currentLake.bodyOfWater))
-            ACEFlow = false;
+            // These have 120 elev data and 5 Flow, ignore flow data
+            if (['Truman', 'Pomme De Terre', "Stockton", "Rend",].includes(currentLake.bodyOfWater))
+              ACEFlow = false;
 
-          // Get current Date, Time and Elev
-          // Convert ACE date to javascript Date format "12/24/2016 02:00:00"
+            // Get current Date, Time and Elev
+            // Convert ACE date to javascript Date format "12/24/2016 02:00:00"
 
-          // Indexes into data for the first entry
+            // Indexes into data for the first entry
 
-          if (data[ACEFlowIndex].Outflow.length == 0) {
-            ACEFlow = false;
-          }
-
-          if (ACEFlow) { // If there are flows, get the data indexes set up for the for loop below.
-            if (Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time) !== Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time)) {
-              // Now need to line up the dates
-
-              // The Flow data comes in on the hour, find the first elev data that is on the hour
-              let elevOnHour = false;
-
-              while (!elevOnHour) {
-                elevMinIndex = data[ACEElevIndex].Elev[ACEElevNum].time.indexOf(":") + 1;
-                elevMin = data[ACEElevIndex].Elev[ACEElevNum].time.substr(elevMinIndex, 2)
-                if (elevMin == "00")
-                  elevOnHour = true;
-                else ACEElevNum++
+            if (ACEFlow) {
+              if (data[ACEFlowIndex].Outflow.length == 0) {
+                ACEFlow = false;
               }
-
-              // Determine if flow date is earlier or later than first elev date
-              // Use the later date as a base and loop thru the earlier date until they match
-              elevTime = Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time);
-              flowTime = Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time);
-              if (elevTime > flowTime)
-                while (elevTime !== flowTime) {
-                  ACEFlowNum++;
-                  flowTime == Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time);
-                }
-              else
-                while (flowTime > elevTime) {
-                  ACEElevNum++;
-                  elevTime = Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time);
-                }
-
             }
-          }
+
+            if (ACEFlow) { // If there are flows, get the data indexes set up for the for loop below.
+              if (Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time) !== Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time)) {
+                // Now need to line up the dates
+
+                // The Flow data comes in on the hour, find the first elev data that is on the hour
+                let elevOnHour = false;
+
+                while (!elevOnHour) {
+                  elevMinIndex = data[ACEElevIndex].Elev[ACEElevNum].time.indexOf(":") + 1;
+                  elevMin = data[ACEElevIndex].Elev[ACEElevNum].time.substr(elevMinIndex, 2)
+                  if (elevMin == "00")
+                    elevOnHour = true;
+                  else ACEElevNum++
+                }
+
+                // Determine if flow date is earlier or later than first elev date
+                // Use the later date as a base and loop thru the earlier date until they match
+                elevTime = Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time);
+                flowTime = Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time);
+                if (elevTime > flowTime)
+                  while (elevTime !== flowTime) {
+                    ACEFlowNum++;
+                    flowTime == Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time);
+                  }
+                else
+                  while (flowTime > elevTime) {
+                    ACEElevNum++;
+                    elevTime = Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time);
+                  }
+
+              }
+            }
 
 
-          // Convert UTC date to local time
-          let localTime = convertStringToUTC(data[ACEElevIndex].Elev[ACEElevNum].time)
+            // Convert UTC date to local time
+            let localTime = convertStringToUTC(data[ACEElevIndex].Elev[ACEElevNum].time)
 
 
-          // Create our increment and loop through each value
-          // For each value create our associated table html
-          let i = ACEFlowNum;
-          let flow = 0;
-          let lastHourDisplayed = -1; // for Istokpoga
-          let displayFlowData = true; // This is for this loop, some lakes we have to sort through the times (Istokpoga, FL)
-          let jIncrement = 1; // default
+            // Create our increment and loop through each value
+            // For each value create our associated table html
+            let i = ACEFlowNum;
+            let flow = 0;
+            let lastHourDisplayed = -1; // for Istokpoga
+            let displayFlowData = true; // This is for this loop, some lakes we have to sort through the times (Istokpoga, FL)
+            let jIncrement = 1; // default
 
-          // if the elev length is more than 3x the flow length, it's probably 
-          // elevs every 15 minutes and flows on the hour 4:1 ratio
-          if (ACEFlow && (data[ACEElevIndex].Elev.length / 3 > data[ACEFlowIndex].Outflow.length))
-            jIncrement = 4;
-
-          // Lower the increment if the elev data is daily
-          if (dailyACEData)
-            jIncrement = 1;
-
-          if (['Eufaula', 'Brantley', 'Columbus'].includes(currentLake.bodyOfWater)) // Eufaula is every 15 minutes with no OutFlow
-            if (currentLake.normalPool < 189) { // This identfies Eufaula AL from Eufaula, OK
+            // if the elev length is more than 3x the flow length, it's probably 
+            // elevs every 15 minutes and flows on the hour 4:1 ratio
+            if (ACEFlow && (data[ACEElevIndex].Elev.length / 3 > data[ACEFlowIndex].Outflow.length))
               jIncrement = 4;
-              exceptionLake = true; // set the exceptionLake flag to bypass the flow check in the for loop below
-            }
-          if (['Brantley'].includes(currentLake.bodyOfWater)) // Brantley is every 15 minutes with no OutFlow
-            jIncrement = 4;
 
-          if (['Red Rock'].includes(currentLake.bodyOfWater)) // Red Rock is every 30 minutes
-            jIncrement = 2;
+            // Lower the increment if the elev data is daily
+            if (dailyACEData)
+              jIncrement = 1;
 
-          for (j = ACEElevNum; j < data[ACEElevIndex].Elev.length; j = j + jIncrement) {
-            // make sure the times match for elev and flow
-            if (!exceptionLake && i < data[ACEFlowIndex].Outflow.length - 1) {
-              if (Date.parse(data[ACEElevIndex].Elev[j].time) !== Date.parse(data[ACEFlowIndex].Outflow[i].time)) {
-                if (ACEFlow) {
-                  // Do the elev and flow dates match
-                  while (Date.parse(data[ACEElevIndex].Elev[j].time) !== Date.parse(data[ACEFlowIndex].Outflow[i].time)) {
-                    // If not, need to line up the dates
+            if (['Eufaula', 'Brantley', 'Columbus'].includes(currentLake.bodyOfWater)) // Eufaula is every 15 minutes with no OutFlow
+              if (currentLake.normalPool < 189) { // This identfies Eufaula AL from Eufaula, OK
+                jIncrement = 4;
+                exceptionLake = true; // set the exceptionLake flag to bypass the flow check in the for loop below
+              }
+            if (['Brantley'].includes(currentLake.bodyOfWater)) // Brantley is every 15 minutes with no OutFlow
+              jIncrement = 4;
 
-                    //Which one is behind
-                    if (Date.parse(data[ACEElevIndex].Elev[j].time) <= Date.parse(data[ACEFlowIndex].Outflow[i].time)) {
-                      // The Flow data comes in on the hour, find the next elev data that is on the hour
-                      let elevOnHour = false;
+            if (['Red Rock'].includes(currentLake.bodyOfWater)) // Red Rock is every 30 minutes
+              jIncrement = 2;
 
-                      while (!elevOnHour) { // until we find an on the hour
-                        // get the index at the 'minutes'
-                        elevMinIndex = data[ACEElevIndex].Elev[j + 1].time.indexOf(":") + 1;
-                        // retrieve the 'minutes'
-                        elevMin = data[ACEElevIndex].Elev[j + 1].time.substr(elevMinIndex, 2)
-                        if (elevMin == "00") { // is it on the hour
-                          elevOnHour = true; // end while loop
-                          j++
-                        } else j++ // increment and loop
-                      }
-                    } else i++
+            for (j = ACEElevNum; j < data[ACEElevIndex].Elev.length; j = j + jIncrement) {
+              // make sure the times match for elev and flow
+              if (!exceptionLake && i < data[ACEFlowIndex].Outflow.length - 1) {
+                if (Date.parse(data[ACEElevIndex].Elev[j].time) !== Date.parse(data[ACEFlowIndex].Outflow[i].time)) {
+                  if (ACEFlow) {
+                    // Do the elev and flow dates match
+                    while (Date.parse(data[ACEElevIndex].Elev[j].time) !== Date.parse(data[ACEFlowIndex].Outflow[i].time)) {
+                      // If not, need to line up the dates
+
+                      //Which one is behind
+                      if (Date.parse(data[ACEElevIndex].Elev[j].time) <= Date.parse(data[ACEFlowIndex].Outflow[i].time)) {
+                        // The Flow data comes in on the hour, find the next elev data that is on the hour
+                        let elevOnHour = false;
+
+                        while (!elevOnHour) { // until we find an on the hour
+                          // get the index at the 'minutes'
+                          elevMinIndex = data[ACEElevIndex].Elev[j + 1].time.indexOf(":") + 1;
+                          // retrieve the 'minutes'
+                          elevMin = data[ACEElevIndex].Elev[j + 1].time.substr(elevMinIndex, 2)
+                          if (elevMin == "00") { // is it on the hour
+                            elevOnHour = true; // end while loop
+                            j++
+                          } else j++ // increment and loop
+                        }
+                      } else i++
+                    }
                   }
                 }
               }
+
+              let elev = data[ACEElevIndex].Elev[j].value.toFixed(2);
+              //localTime = convertStringToUTC(data[ACEElevIndex].Elev[j].time);
+              let timestamp = convertStringToUTC(data[ACEElevIndex].Elev[j].time);
+              //let time = localTime.toString().substring(16, 21);
+              flow = 'No data'; // default value, this differentiates no reported data from no data available (N/A)
+              if (ACEFlow)
+                if (i < data[ACEFlowIndex].Outflow.length) {
+
+                  if (data[ACEFlowIndex].Outflow[i].value !== -99)
+                    flow = data[ACEFlowIndex].Outflow[i].value // commented out for production + " " + convertStringToUTC(data[ACEFlowIndex].Outflow[i].time);
+
+                } else flow = 'Missing'; // This differentiate this condition vs N/A or No data
+
+              /*
+              if (isLakeIstokpoga == true && localTime.getHours() == lastHourDisplayed) {
+                  displayFlowData = false;
+              } else {
+                  lastHourDisplayed = localTime.getHours();
+                  displayFlowData = true;
+              }*/
+
+              if (displayFlowData) {
+                if (!ACEFlow) flow = "N/A" // no data available
+                displayBatch.push({
+                  date: timestamp, //timestamps must be UTC on Server side and converted to local on client side
+                  time: " ",
+                  elev: elev,
+                  flow: flow
+                });
+
+              }
+
+              i++;
+
             }
-
-            let elev = data[ACEElevIndex].Elev[j].value.toFixed(2);
-            //localTime = convertStringToUTC(data[ACEElevIndex].Elev[j].time);
-            let timestamp = convertStringToUTC(data[ACEElevIndex].Elev[j].time);
-            //let time = localTime.toString().substring(16, 21);
-            flow = 'No data'; // default value, this differentiates no reported data from no data available (N/A)
-            if (ACEFlow)
-              if (i < data[ACEFlowIndex].Outflow.length) {
-
-                if (data[ACEFlowIndex].Outflow[i].value !== -99)
-                  flow = data[ACEFlowIndex].Outflow[i].value // commented out for production + " " + convertStringToUTC(data[ACEFlowIndex].Outflow[i].time);
-
-              } else flow = 'Missing'; // This differentiate this condition vs N/A or No data
-
-            /*
-            if (isLakeIstokpoga == true && localTime.getHours() == lastHourDisplayed) {
-                displayFlowData = false;
-            } else {
-                lastHourDisplayed = localTime.getHours();
-                displayFlowData = true;
-            }*/
-
-            if (displayFlowData) {
-              if (!ACEFlow) flow = "N/A" // no data available
-              displayBatch.push({
-                date: timestamp, //timestamps must be UTC on Server side and converted to local on client side
-                time: " ",
-                elev: elev,
-                flow: flow
-              });
-
-            }
-
-            i++;
+            // Convert UTC date to local time
+            /*localTime = convertStringToUTC(data[ACEElevIndex].Elev[j - jIncrement].time)
+            currentDate = localTime.toString().substring(4, 15);
+            currentTime = localTime.toString().substring(16, 21);
+  
+            currentElev = parseFloat(data[ACEElevIndex].Elev[j - jIncrement].value).toFixed(2);
+  
+            currentDelta = (currentElev - lakePool).toFixed(2);*/
 
           }
-          // Convert UTC date to local time
-          /*localTime = convertStringToUTC(data[ACEElevIndex].Elev[j - jIncrement].time)
-          currentDate = localTime.toString().substring(4, 15);
-          currentTime = localTime.toString().substring(16, 21);
 
-          currentElev = parseFloat(data[ACEElevIndex].Elev[j - jIncrement].value).toFixed(2);
+          // End of data processing code from thisLake.js
 
-          currentDelta = (currentElev - lakePool).toFixed(2);*/
-
+          callback(null, displayBatch.reverse());
         }
-
-        // End of data processing code from thisLake.js
-
-        callback(null, displayBatch.reverse());
-      }
       })
     }
     // Date Conversion functions from thisLake.js
@@ -864,7 +866,7 @@ module.exports = function (app) {
         // Get the most recent 30 days data
         for (i = 0; i < 30; i++) {
           // find next end of row
-          for (j = j - 5; body.substr(j, 5) !== "</tr>"; j--) {}
+          for (j = j - 5; body.substr(j, 5) !== "</tr>"; j--) { }
 
           data.push({
             lakeName: lakeName,
