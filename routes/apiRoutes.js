@@ -349,6 +349,10 @@ module.exports = function (app) {
 
           // Indexes into data for the first entry
 
+          if (currentLake.bodyOfWater == "Jordan") {
+            ACEFlow = false;
+          }
+
           if (ACEFlow) { // If there are flows, get the data indexes set up for the for loop below.
             if (Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time) !== Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time)) {
               // Now need to line up the dates
