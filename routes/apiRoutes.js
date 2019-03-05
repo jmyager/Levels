@@ -349,7 +349,7 @@ module.exports = function (app) {
 
           // Indexes into data for the first entry
 
-          if (currentLake.bodyOfWater == "Jordan") {
+          if (data[ACEFlowIndex].Outflow.length == 0) {
             ACEFlow = false;
           }
 
