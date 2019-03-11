@@ -29,17 +29,34 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/thisLake.html"));
   });
 
-  app.get("/lakes", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/lakes.html"));
+  app.get("/nearby-lakes", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/nearby-lakes.html"));
+  })
+
+  app.get("/search-lakes", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/search-lakes.html"));
   })
 
   app.get("/tournaments", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/tournaments.html"));
   })
 
+  app.get("/tournament-results", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/tournament-results.html"));
+  })
+
+  app.get("/advertise", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/advertise.html"));
+  })
+
   app.get("/contact", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/contact.html"));
   })
+
+  app.get("/about", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/about.html"));
+  })
+  
   // If no matching route is found default to home
   app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
