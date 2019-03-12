@@ -1,4 +1,3 @@
-
 // Pull the lake name from the end of the current URL
 let parsedURL = window.location.href.split("/");
 let lakeRoute = parsedURL[parsedURL.length - 1];
@@ -32,19 +31,8 @@ let adCharityUrl = "";
 // Counter variable for flowUSGS to use to sync time with elevUSGS
 let k = 0;
 
-
-// Hide loader gif
-function hideLoader() {
-    $('#lds-ring').hide();
-}
-
-// Hide loader gif after 20 seconds if page content hasn't loaded
-setTimeout(hideLoader, 20 * 1000);
-
 // Function to set current values on page
 function displayCurrentPageValues() {
-    // Hide loading gif
-    hideLoader();
     // Set lake title on page
     $("#lakeTitle").append(currentLake.bodyOfWater);
     $("#lakeSponsor").append(bodyOfWaterName);
@@ -60,8 +48,6 @@ function displayCurrentPageValues() {
 
 // Function to set current values on page
 function displayCurrentPageValuesWithUTC() {
-    // Hide loading gif 
-    hideLoader();
     // Set lake title on page
     $("#lakeTitle").append(currentLake.bodyOfWater);
     $("#lakeSponsor").append(bodyOfWaterName);
@@ -107,7 +93,7 @@ function buildTable(data) {
         $("#lakeWell-" + i + 1).append("<td>" + elev + "</td>");
         $("#lakeWell-" + i + 1).append("<td>" + flow + "</td>");
     }
-    buildElevChart(data);
+    // buildElevChart(data);
 }
 // Function to build table on page
 function buildTableWithUTC(data) {
@@ -117,19 +103,16 @@ function buildTableWithUTC(data) {
         var elev = "N/A";
         var flow = "N/A";
         // Check to see if data contains date, time, elev, or flow. If not it will stay as "N/A"
-        localTime = new Date(data[i].date);
+        localTime =  new Date(data[i].date);
         if (typeof data[i].date !== 'undefined') {
-            date = localTime.toString().substring(0, 10);
+            date = localTime.toString().substring(0,10);
         }
-        data[i].time = time;
         if (typeof data[i].date !== 'undefined') {
-            time = localTime.toString().substring(16, 21);
+            time = localTime.toString().substring(16,21);
         }
-        data[i].date = date;
         if (typeof data[i].elev !== 'undefined') {
             elev = data[i].elev;
         }
-        data[i].elev = parseFloat(elev);
         if (typeof data[i].flow !== 'undefined') {
             flow = data[i].flow;
         }
@@ -146,7 +129,7 @@ function buildTableWithUTC(data) {
         $("#lakeWell-" + i + 1).append("<td>" + elev + "</td>");
         $("#lakeWell-" + i + 1).append("<td>" + flow + "</td>");
     }
-    buildElevChart(data);
+    // buildElevChart(data);
 }
 
 // Function to build chart on page
@@ -154,27 +137,12 @@ function buildElevChart(data) {
     // Our data must be parsed into separate flat arrays for the chart
     let labelBatch = [];
     let dataElevBatch = [];
-    let sumOfElevs = data[0].elev;
-    let divisor = 1;
     // Loop through our data for 24 data points if we have it
     for (var i = 0; i < data.length; i++) {
-        // if we're past the first entry
-        if (i > 0) {
-            // if we're still on the same day
-            if (data[i].date === data[i-1].date) {
-                // add to our average variables
-                sumOfElevs += data[i].elev;
-                divisor++
-            }
-            // else we're on a new day. so push data and reset averages
-            else {
-                labelBatch.push(data[i-1].date);
-                dataElevBatch.push(sumOfElevs / divisor); // calculate average
-                sumOfElevs = data[i].elev;
-                divisor = 1;
-            }
+        if (!labelBatch.includes(data[i].date)) {
+            labelBatch.push(data[i].date);
+            dataElevBatch.push(data[i].elev);
         }
-        // when a week of data has been reached stop
         if (labelBatch.length > 6) {
             break;
         }
@@ -207,7 +175,7 @@ function buildElevChart(data) {
                 xAxes: [{
                     display: true,
                     scaleLabel: {
-                        display: false,
+                        display: true,
                         labelString: 'Date',
                         fontSize: 20
                     }
@@ -215,7 +183,7 @@ function buildElevChart(data) {
                 yAxes: [{
                     display: true,
                     scaleLabel: {
-                        display: false,
+                        display: true,
                         labelString: 'Level (feet)',
                         fontSize: 20
                     }
@@ -223,6 +191,7 @@ function buildElevChart(data) {
             }
         }
     });
+    console.log(data[0].flow);
     if (data[0].flow !== "N/A" && typeof data[0].flow !== 'undefined') {
         buildFlowChart(data);
     }
@@ -284,7 +253,7 @@ function buildFlowChart(data) {
                 xAxes: [{
                     display: true,
                     scaleLabel: {
-                        display: false,
+                        display: true,
                         labelString: 'Date',
                         fontSize: 20
                     }
@@ -292,7 +261,7 @@ function buildFlowChart(data) {
                 yAxes: [{
                     display: true,
                     scaleLabel: {
-                        display: false,
+                        display: true,
                         labelString: 'Flow (feet)',
                         fontSize: 20
                     }
@@ -320,28 +289,28 @@ function convertStringToUTC(convertedTime) {
     // Time now looks like "Thu Dec 27 2018 11:15:00 GMT-0500 (Eastern Standard Time)"
     // Substring the pieces we want to display
     return (convertedTime)
-}
+  }
 
 // Function to make elevation USGS call
 function elevUSGS(callback) {
     // API call for elev data
     $.ajax({
-        url: "/api/usgs",
-        method: "GET",
-        data: {
-            usgsURL: elevURL,
-            currentLake: currentLake
-        }
-    })
+            url: "/api/usgs",
+            method: "GET",
+            data: {
+                usgsURL: elevURL,
+                currentLake: currentLake
+            }
+        })
         .then(function (data) {
+            console.log(data);
 
             // Check to see that USGS returned data
             if (data.length > 0) {
                 displayBatch = data;
 
-                localTime = new Date(displayBatch[0].date);
-                currentDate = localTime.toString().substring(0, 10);;
-                currentTime = localTime.toString().substring(16, 21);
+                currentDate = displayBatch[0].date;
+                currentTime = displayBatch[0].time;
                 currentElev = displayBatch[0].elev;
                 currentDelta = (currentElev - lakePool).toFixed(2);
             } else
@@ -355,10 +324,11 @@ function elevUSGS(callback) {
 function flowUSGS(callback) {
     // API call for elev data
     $.ajax({
-        url: flowURL,
-        method: "GET",
-    })
+            url: flowURL,
+            method: "GET",
+        })
         .then(function (data) {
+            console.log("flowUSGS data ", data);
             // Parse through the json data to find the values we want
             let flowValues = data.value.timeSeries[0].values[0].value
             // Reverse the order of our data so most recent date is first
@@ -368,6 +338,7 @@ function flowUSGS(callback) {
                 displayBatch[i].flow = flowValues[k].value;
                 k += 4;
             }
+            console.log(displayBatch)
             callback(null, displayBatch);
         });
 }
@@ -376,30 +347,33 @@ function flowUSGS(callback) {
 function dataACE(callback) {
     // API call for elev data
     $.ajax({
-        url: "/api/a2w",
-        method: "GET",
-        data: {
-            a2wURL: elevURL,
-            currentLake: currentLake
-        }
-    })
+            url: "/api/a2w",
+            method: "GET",
+            data: {
+                a2wURL: elevURL,
+                currentLake: currentLake
+            }
+        })
         .then(function (data) {
+            console.log(data);
+
             // if statement added for bug when A2W is down
             if (data.includes("Data service temporarily unavailable. Please check back later")) {
                 currentLake.bodyOfWater = currentLake.bodyOfWater + " <br><h3>Water Level sensor down, try again later or report this outage.</h3>";
             }
             else {
+
             // Check to see that ACE returned data
             if (data.length > 0) {
                 displayBatch = data;
 
-                localTime = new Date(displayBatch[0].date);
-                currentDate = localTime.toString().substring(0, 10);;
-                currentTime = localTime.toString().substring(16, 21);
+                localTime =  new Date(displayBatch[0].date);
+                currentDate = localTime.toString().substring(0,10);;
+                currentTime = localTime.toString().substring(16,21);
                 currentElev = displayBatch[0].elev;
                 currentDelta = (currentElev - lakePool).toFixed(2);
             } else
-                currentLake.bodyOfWater = currentLake.bodyOfWater + " <br><h3>Water Level sensor down, try again later or report this outage.</h3>";
+                currentLake.bodyOfWater = currentLake.bodyOfWater + " <br> Water Level sensor down, try again later or report this outage";
 
             callback(null, displayBatch);
         }
@@ -419,7 +393,7 @@ function convertStringToUTC(convertedTime) {
     // Convert UTC date to local time
     // Convert to ISO format first. '2011-04-11T10:20:30Z'
     convertedTime = convertedTime.trim();
-    let convertedMonth = convertedTime.substring(5, 7);
+    let convertedMonth = convertedTime.substring(5,7);
     convertedMonth = getMonthFromString(convertedMonth);
     convertedMonth = convertedMonth.toString();
     if (convertedMonth.length == 1) convertedMonth = "0" + convertedMonth;
@@ -463,17 +437,19 @@ function convertUTCDate(timestamp) {
 // Function to make elev TVA call
 function dataTVA(callback) {
     $.ajax({
-        url: "/api/tva",
-        method: "GET",
-        data: {
-            tvaDataURL: elevURL,
-            tvaLakeName: bodyOfWaterName
-        }
-    })
+            url: "/api/tva",
+            method: "GET",
+            data: {
+                tvaDataURL: elevURL,
+                tvaLakeName: bodyOfWaterName
+            }
+        })
         .then(function (data) {
+            console.log("TVA Call")
+            console.log(data);
 
             if (seaLevelDelta !== 0)
-                elevationAdjust = (parseFloat(data[0].level) + seaLevelDelta).toFixed(2);
+                elevationAdjust = (parseFloat(data[0].Average) + seaLevelDelta).toFixed(2);
             else {
                 if (lakePool == 0)
                     seaLevelDelta = lakePool;
@@ -495,7 +471,7 @@ function dataTVA(callback) {
 
                 let date = element.date;
                 let time = element.time;
-                let flow = element.outflow;
+                let flow = element.outflow.replace(',', '')
 
                 // adjust the elev for lakes with data relative to full pool (not from sealevel))
                 if (seaLevelDelta !== 0)
@@ -517,14 +493,16 @@ function dataTVA(callback) {
 // Function to make elev Duke call
 function dataDuke(callback) {
     $.ajax({
-        url: "/api/duke",
-        method: "GET",
-        data: {
-            dukeDataURL: elevURL,
-            dukeLakeName: bodyOfWaterName
-        }
-    })
+            url: "/api/duke",
+            method: "GET",
+            data: {
+                dukeDataURL: elevURL,
+                dukeLakeName: bodyOfWaterName
+            }
+        })
         .then(function (data) {
+            console.log("DUKE Call")
+            console.log(data);
             // adjust the elev for lakes with data relative to full pool (not from sealevel))
 
             let skipToValidData = 0;
@@ -592,10 +570,12 @@ function dataDuke(callback) {
 function elevCUBE(callback) {
     // API call for flow
     $.ajax({
-        url: "/api/cube",
-        method: "GET",
-    })
+            url: "/api/cube",
+            method: "GET",
+        })
         .then(function (data) {
+            console.log("CUBE Call")
+            console.log(data)
             displayBatch = data;
             // Determine which lake has been selected of the three cube lakes
             if (lakeRoute === "highrock") {
@@ -624,13 +604,15 @@ function elevCUBE(callback) {
 function elevAlab(callback) {
     // API call for flow
     $.ajax({
-        url: "/api/alabama",
-        method: "GET",
-        data: ({
-            lakeRoute: lakeRoute
+            url: "/api/alabama",
+            method: "GET",
+            data: ({
+                lakeRoute: lakeRoute
+            })
         })
-    })
         .then(function (data) {
+            console.log("Alab Call")
+            console.log(data)
 
             // Set current Date, Time and Elev
             currentElev = data[0].elev;
@@ -646,14 +628,16 @@ function elevAlab(callback) {
 // Function to make elev SJRWMD call St Johns River Water Management District
 function dataSJRWMD(callback) {
     $.ajax({
-        url: "/api/sjrwmd",
-        method: "GET",
-        data: {
-            sjrwmdDataURL: elevURL,
-            sjrwmdLakeName: bodyOfWaterName
-        }
-    })
+            url: "/api/sjrwmd",
+            method: "GET",
+            data: {
+                sjrwmdDataURL: elevURL,
+                sjrwmdLakeName: bodyOfWaterName
+            }
+        })
         .then(function (data) {
+            console.log("CUBE Call");
+            console.log(data);
             // Set current Date, Time and Elev
             currentElev = data[0].level;
             currentDate = data[0].date;
@@ -689,14 +673,16 @@ function dataSJRWMD(callback) {
 // Function to make elev TWDB call Texas Water Development Board
 function dataTWDB(callback) {
     $.ajax({
-        url: "/api/twdb",
-        method: "GET",
-        data: {
-            twdbDataURL: elevURL,
-            twdbLakeName: bodyOfWaterName
-        }
-    })
+            url: "/api/twdb",
+            method: "GET",
+            data: {
+                twdbDataURL: elevURL,
+                twdbLakeName: bodyOfWaterName
+            }
+        })
         .then(function (data) {
+            console.log("CUBE Call");
+            console.log(data);
             // Set current Date, Time and Elev
             currentElev = data[0].level;
             currentDate = data[0].date;
@@ -753,9 +739,9 @@ $("#lakeTournaments").on("click", function (e) {
 // Declare variable to hold currentLake object
 var currentLake = {};
 $.ajax({
-    url: "/api/lake-data",
-    method: "GET",
-})
+        url: "/api/lake-data",
+        method: "GET",
+    })
     .then(function (data) {
         console.log(data);
         for (var i = 0; i < data.length; i++) {
@@ -791,12 +777,12 @@ $.ajax({
                 elevUSGS(function () {
                     if (flowURL !== "none") {
                         flowUSGS(function () {
-                            displayCurrentPageValuesWithUTC();
-                            buildTableWithUTC(displayBatch);
+                            displayCurrentPageValues();
+                            buildTable(displayBatch);
                         });
                     } else {
-                        displayCurrentPageValuesWithUTC();
-                        buildTableWithUTC(displayBatch);
+                        displayCurrentPageValues();
+                        buildTable(displayBatch);
                     }
                 });
             } else if (source === "TVA") {

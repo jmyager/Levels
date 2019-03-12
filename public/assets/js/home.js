@@ -45,7 +45,7 @@ $.ajax({
                 case error.PERMISSION_DENIED:
                     x.innerHTML = `
                     <p>You've opted out of using location services or have it turned off. Either search using zipcode or enable location permission and try again.</p>
-                    <a style="margin-bottom: 20px;" href='/search-lakes' class='btn btn-success'>View All Lakes</a>
+                    <a style="margin-bottom: 20px;" href='/lakes' class='btn btn-success'>View All Lakes</a>
                     <br><a style='color: #0060B6;' href='https://www.lifewire.com/denying-access-to-your-location-4027789' target='_blank'>Help with enabling location services on desktop</a>
                     <br><a style='color: #0060B6;' href='https://help.yahoo.com/kb/SLN24002.html' target='_blank'>Help with enabling location services on mobile</a>`
                     break;
