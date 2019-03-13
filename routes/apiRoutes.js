@@ -240,9 +240,10 @@ module.exports = function (app) {
           for (j = 0; j < elevValues.length; j += jIncrement) {
             let element = elevValues[j];
             let elev = element.value;
-            let splitTimeDate = element.dateTime.split("T");
-            let date = splitTimeDate[0].substring(2, 10).replace('-', ' ');
-            let time = splitTimeDate[1].substring(0, 5);
+            // let splitTimeDate = element.dateTime.split("T");
+            // let date = splitTimeDate[0].substring(2, 10).replace('-', ' ');
+            // let time = splitTimeDate[1].substring(0, 5);
+            let timestamp = element.dateTime;
             let flow = "N/A";
             if (timeSeriesFlowIndex >= 0)
               flow = flowValues[j].value;
@@ -252,8 +253,8 @@ module.exports = function (app) {
             }
 
             displayBatch.push({
-              date: date,
-              time: time,
+              date: timestamp,
+              time: "",
               elev: elev,
               flow: flow
             });
@@ -291,30 +292,44 @@ module.exports = function (app) {
         if (error) {
           callback(error);
         };
-
         // if statement added for bug
+        // add this in later: 
+        // /<[a-z][\s\S]*>/i.test() 
+        //This is Regex to check if a string contains html elements
         if (body.includes("503 Service Temporarily Unavailable")) {
-          data = "Data service temporarily unavailable. Please check back later";
+          data = "Data service temporarily unavailable. Please check back later (503)";
           callback(null, data);
-        }
-        else {
+        } else {
+
+
 
           data = JSON.parse(body);
 
           // Insert data processing code from thisLake.js here
 
-          console.log("ACE Call");
-          console.log(data);
-          //comment add to fix
           let ACEFlow = false;
           let ACEFlowIndex = -1;
           let ACEElevIndex = 0;
           let ACEElevNum = 0;
           let ACEFlowNum = 0;
           let exceptionLake = false;
+          let stageRiver = [];
+
+          if (typeof data[0].Elev == 'undefined' &&
+            typeof data[0].Stage !== 'undefined' && currentLake.bodyOfWater.indexOf("River") >= 0) {
+
+            stageRiver = data; //Copy the data
+            data = []; //Clear the data objects
+            data.push({
+              Elev: stageRiver[0].Stage
+
+            })
+          }
 
           // clear displayBatch
           displayBatch = [];
+
+
 
           //see if A2W is returning Elev Data
           if (typeof data[0].Elev !== 'undefined') {
@@ -341,19 +356,13 @@ module.exports = function (app) {
             let isLakeIstokpoga = currentLake.bodyOfWater == 'Istokpoga'; // default value, this is when the ACE data is Fucked Up like Istokpoga in Florida, Damn...
 
             // These have 120 elev data and 5 Flow, ignore flow data
-            if (['Truman', 'Pomme De Terre', "Stockton", "Rend",].includes(currentLake.bodyOfWater))
+            if (['Truman', 'Pomme De Terre', "Stockton", "Rend", ].includes(currentLake.bodyOfWater))
               ACEFlow = false;
 
             // Get current Date, Time and Elev
             // Convert ACE date to javascript Date format "12/24/2016 02:00:00"
 
             // Indexes into data for the first entry
-
-            if (ACEFlow) {
-              if (data[ACEFlowIndex].Outflow.length == 0) {
-                ACEFlow = false;
-              }
-            }
 
             if (ACEFlow) { // If there are flows, get the data indexes set up for the for loop below.
               if (Date.parse(data[ACEElevIndex].Elev[ACEElevNum].time) !== Date.parse(data[ACEFlowIndex].Outflow[ACEFlowNum].time)) {
@@ -390,7 +399,7 @@ module.exports = function (app) {
 
 
             // Convert UTC date to local time
-            let localTime = convertStringToUTC(data[ACEElevIndex].Elev[ACEElevNum].time)
+            // let localTime = convertStringToUTC(data[ACEElevIndex].Elev[ACEElevNum].time)
 
 
             // Create our increment and loop through each value
@@ -452,9 +461,7 @@ module.exports = function (app) {
               }
 
               let elev = data[ACEElevIndex].Elev[j].value.toFixed(2);
-              //localTime = convertStringToUTC(data[ACEElevIndex].Elev[j].time);
               let timestamp = convertStringToUTC(data[ACEElevIndex].Elev[j].time);
-              //let time = localTime.toString().substring(16, 21);
               flow = 'No data'; // default value, this differentiates no reported data from no data available (N/A)
               if (ACEFlow)
                 if (i < data[ACEFlowIndex].Outflow.length) {
@@ -464,13 +471,16 @@ module.exports = function (app) {
 
                 } else flow = 'Missing'; // This differentiate this condition vs N/A or No data
 
-              /*
-              if (isLakeIstokpoga == true && localTime.getHours() == lastHourDisplayed) {
-                  displayFlowData = false;
+
+              let splitLine = data[ACEElevIndex].Elev[j].time.split(/[ ]+/);
+              splitLine = splitLine[1].split(/[:]+/);
+
+              if (isLakeIstokpoga == true && splitLine[0] == lastHourDisplayed) {
+                displayFlowData = false;
               } else {
-                  lastHourDisplayed = localTime.getHours();
-                  displayFlowData = true;
-              }*/
+                lastHourDisplayed = splitLine[0];
+                displayFlowData = true;
+              }
 
               if (displayFlowData) {
                 if (!ACEFlow) flow = "N/A" // no data available
@@ -486,14 +496,6 @@ module.exports = function (app) {
               i++;
 
             }
-            // Convert UTC date to local time
-            /*localTime = convertStringToUTC(data[ACEElevIndex].Elev[j - jIncrement].time)
-            currentDate = localTime.toString().substring(4, 15);
-            currentTime = localTime.toString().substring(16, 21);
-  
-            currentElev = parseFloat(data[ACEElevIndex].Elev[j - jIncrement].value).toFixed(2);
-  
-            currentDelta = (currentElev - lakePool).toFixed(2);*/
 
           }
 
@@ -597,37 +599,54 @@ module.exports = function (app) {
         let tvaTime = "";
         let tvaElev = "";
         let tvaOutFlow = "";
-        let tvaOutFlowStart = 0
 
         _.each(body.split("\r\n"), function (line) {
-          // Split the text body into readable lines
           var splitLine;
           line = line.trim();
-          splitLine = line.split(/[ ]+/);
 
           // Check to see if this is a data line by checking for keywords
           if (line.substring(1, 6) == "LOCAL") {
             // It's a date time line, save the date and time
             // Formulate the date 
-            tvaDate = splitLine[0].substr(15, 9);
+            // Split the text body into readable lines
+            splitLine = line.split(/[ ]+/);
+            splitLine = splitLine[0].split(/[>]+/);
+            tvaDate = splitLine[1];
             // Formulate the time
+            splitLine = line.split(/[ ]+/);
             tvaTime = splitLine[1] + " " + splitLine[2] + " " + splitLine[3].substr(0, 3);
+          }
+
+          if (line.substring(1, 8) == "OBS_DAY") {
+            // It's a Fontana Date line, isolate and save the date
+            splitLine = line.split(/[>]+/);
+            splitLine = splitLine[1].split(/[<]+/);
+            tvaDate = splitLine[0];
+          }
+
+          if (line.substring(1, 7) == "OBS_HR") {
+            // It's a Fontana time line, isolate and save the elevation
+            splitLine = line.split(/[>]+/);
+            splitLine = splitLine[1].split(/[<]+/);
+            tvaTime = splitLine[0];
           }
 
           if (line.substring(1, 6) == "UPSTR") {
             // It's an elevation level line, save the elevation
-            tvaElev = line.substring(18, 24)
+            splitLine = line.split(/[>]+/);
+            splitLine = splitLine[1].split(/[<]+/);
+            tvaElev = splitLine[0];
+            tvaElev = Number(tvaElev.replace(',', ''));
           }
 
           if (line.substring(1, 4) == "AVG") {
-            // Last Data item
-            // Set the outFlowStart to 25 (5 char outFlow
-            tvaOutFlowStart = 25;
-            if (line.substring(24, 25) != " " && line.substring(23, 24) != " ")
-              tvaOutFlowStart = 23;
-            else if (line.substring(24, 25) != " ")
-              tvaOutFlowStart = 24;
-            tvaOutFlow = line.substring(tvaOutFlowStart, 30)
+            splitLine = line.split(/[>]+/);
+            splitLine = splitLine[1].split(/[<]+/);
+
+            tvaOutFlow = Number(splitLine[0].trim().replace(",", ""));
+          }
+          if (line.substring(1, 5) == "/ROW") {
+            if (tvaTime == 'noon') tvaTime = '12 PM';
             // Push each line into data object
             data.push({
               lakeName: lakeName,
@@ -699,6 +718,7 @@ module.exports = function (app) {
 
       // Get today's date to build request url
       var today = new Date();
+      // Next line converts month number to 2 digits
       var mm = ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1); //Fancy conversion because .getMonth() will return numbers 0-12, but we need two digits months to build url
       var yyyy = today.getFullYear();
       var date = "/" + yyyy + "/" + mm;
@@ -866,7 +886,7 @@ module.exports = function (app) {
         // Get the most recent 30 days data
         for (i = 0; i < 30; i++) {
           // find next end of row
-          for (j = j - 5; body.substr(j, 5) !== "</tr>"; j--) { }
+          for (j = j - 5; body.substr(j, 5) !== "</tr>"; j--) {}
 
           data.push({
             lakeName: lakeName,
@@ -948,9 +968,26 @@ module.exports = function (app) {
     var txData = require("../data/tournamentData");
 
     response.json(txData);
-
-
   });
+
+
+  app.get("/api/zip", function (request, response) {
+    // obtain user's zip from client
+    let userZip = request.query.userZip;
+    // load in zip lat lon data
+    var zipData = require("../data/zipDataFormatted");
+    data = {};
+    // loop through zip data and check for a match
+    zipData.forEach(function (zip) {
+      // if match send the lat lon to client
+      if (userZip == zip.zip) {
+        data.zip = zip.zip;
+        data.lat = zip.lat;
+        data.lon = zip.lon;
+      }
+    });
+    response.send(data);
+  })
 
 
   // Fetch weather data
