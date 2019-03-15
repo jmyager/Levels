@@ -1,3 +1,5 @@
+"usestrict";
+
 var txBatch = [];
 var currentBatch = [];
 let flatBatch = [];
@@ -255,11 +257,11 @@ $("#clearSubmit").on("click", function (e) {
     $("#addFilterSubmit").hide();
     $("#newFilterSubmit").hide();
     currentBatch = txBatch;
+    console.log(txBatch);
     displayFlatData(txBatch);
     $("#filterWrapper").toggle();
     filtered = false;
     filteredTags = [];
-    flattenData(txBatch);
 })
 
 // Define generic filter function

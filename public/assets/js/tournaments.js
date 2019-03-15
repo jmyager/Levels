@@ -87,6 +87,7 @@ function populateFilter(data) {
 function flattenData(data, callback) {
     flatBatch = [];
     data.forEach(function (element) {
+        console.log(data);
         for (k = 0; k < element.trails.length; k++) {
             for (l = 0; l < element.trails[k].tournaments.length; l++) {
                 // Format the tx date to check against today's date
@@ -258,7 +259,6 @@ $("#clearSubmit").on("click", function (e) {
     $("#filterWrapper").toggle();
     filtered = false;
     filteredTags = [];
-    flattenData(txBatch);
 })
 
 // Define generic filter function
