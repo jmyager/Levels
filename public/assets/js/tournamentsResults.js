@@ -113,8 +113,6 @@ function flattenData(data, callback) {
 
 // Function to display flat data
 function displayFlatData(data) {
-    console.log(data);
-    $("#txSection").empty();
     let i = 0;
     data.forEach(function (element) {
         // Create the row well to hold our HTML

@@ -29,19 +29,26 @@
 
 .clickable-row { 
     cursor: pointer; 
-    background-color: rgba(76, 175, 80, 0.3);
+    color: rgb(75, 94, 177);
+    text-decoration: underline;
 }
 
-.clickable-row:hover {
-    background-color: rgba(76, 175, 80, 0.5);
-}
-
-.results-clickable-row {
+.clickable-row-results {
     cursor: pointer;
-    background-color: rgba(255, 72, 66, 0.3)
+    color: rgb(107, 0, 0);
+    text-decoration: underline;
 }
 
-.results-clickable-row:hover {
-    background-color: rgba(255, 72, 66, 0.5);
+.clickable-row-results:hover {
+    background-color: rgb(107,0,0,0.8);
+    color: white;
+}
+
+td {
+    color: inherit;
+}
+.clickable-row:hover {
+    background-color: rgba(75,94,177,0.8);
+    color: white;
 }
 

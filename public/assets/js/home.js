@@ -14,7 +14,6 @@ $.ajax({
     method: "GET",
 })
     .then(function (data) {
-        console.log(data);
         lakeData = data;
 
 
@@ -63,7 +62,7 @@ $.ajax({
 
         function findNearbyLakes(userLat, userLon) {
             closeLakes = [];
-            // loop through lake data (right now only NC)
+            // loop through lake data
             lakeData.forEach(function (state) {
                 state.lakes.forEach(function (lake) {
                     // if lake is not already collected (duplicate)
@@ -154,7 +153,6 @@ $.ajax({
             $('#lds-ring').show();
             // run get location function
             getLocation(function (userLat, userLon) {
-                console.log(userLat + ", " + userLon);
                 findNearbyLakes(userLat, userLon);
             });
         });
@@ -162,16 +160,15 @@ $.ajax({
         // user clicks zip code button
         $('#zipBtn').on('click', function (e) {
             e.preventDefault();
-            // Show loader gif
-            $('#lds-ring').show();
             userZip = $('#zipInput').val().trim();
             if (isNaN(userZip) || userZip.length !== 5) {
                 $('#validationMessage').text("Not a valid zip code");
             }
             else {
+                // Show loader gif
+                $('#lds-ring').show();
                 // remove validation message if present
                 $('.right p').empty();
-                console.log(userZip);
                 $.ajax({
                     url: "/api/zip",
                     method: "GET",
@@ -181,11 +178,9 @@ $.ajax({
                 })
                     .then(function (data) {
                         if ($.isEmptyObject(data)) {
-                            console.log(data);
                             $('#validationMessage').text("Not a valid zip code");
                         }
                         else {
-                            console.log(data);
                             userLat = data.lat;
                             userLon = data.lon;
                             findNearbyLakes(userLat, userLon);
