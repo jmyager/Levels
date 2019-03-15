@@ -92,7 +92,7 @@ function flattenData(data, callback) {
                 // Format the tx date to check against today's date
                 let txDate = new Date(element.trails[k].tournaments[l].date);
                 let todaysDate = new Date();
-                // If tx date is in the past (exclude all future dates)
+                // If tx date is in the future (exclude all past dates)
                 if (Date.parse(txDate) < Date.parse(todaysDate)) {
                     // Push our data into a flat array for easier sort later
                     flatBatch.push({
@@ -113,6 +113,7 @@ function flattenData(data, callback) {
 
 // Function to display flat data
 function displayFlatData(data) {
+    $("#txSection").empty();
     let i = 0;
     data.forEach(function (element) {
         // Create the row well to hold our HTML
@@ -123,12 +124,17 @@ function displayFlatData(data) {
         let entryLink = element.entryLink;
         let resultsLink = element.resultsLink;
 
-        // Check to see if a resultsLink exists
-        if (resultsLink) {
-            // Set href as resultsLink
-            txSection.attr("data-url", resultsLink); // Add data attribute to the row with resultsLink url
-            txSection.addClass("clickable-row-results"); // ADd clickable results row css styles
-        }
+        // Format the tx date to check against today's date
+        let txDate = new Date(element.date);
+        let todaysDate = new Date();
+
+       
+            // Check to see if a resultsLink exists
+            if (entryLink) {
+                // Set href as resultsLink
+                txSection.attr("data-url", entryLink); // Add data attribute to the row with resultsLink url
+                txSection.addClass("clickable-row-results"); // ADd clickable results row css styles
+            }
 
         $("#txSection").append(txSection);
         // Append the data values to the table row
@@ -169,9 +175,9 @@ $.ajax({
             var newBatch = flatBatch.sort(sort_by('date', dateSort, function (a) {
                 return a.toUpperCase()
             }));
-            dateSort ^= true;
             // display our newly flattened data for the first time (sorted by date);
             displayFlatData(newBatch);
+            dateSort ^= true;
             txBatch = newBatch;
             currentBatch = newBatch;
             // displayData(txBatch);
