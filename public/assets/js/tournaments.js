@@ -122,12 +122,6 @@ function displayFlatData(data) {
         txSection.attr("id", "txWell-" + i + 1);
 
         let entryLink = element.entryLink;
-        let resultsLink = element.resultsLink;
-
-        // Format the tx date to check against today's date
-        let txDate = new Date(element.date);
-        let todaysDate = new Date();
-
        
             // Check to see if a resultsLink exists
             if (entryLink) {

@@ -121,18 +121,13 @@ function displayFlatData(data) {
         txSection.addClass("well");
         txSection.attr("id", "txWell-" + i + 1);
 
-        let entryLink = element.entryLink;
         let resultsLink = element.resultsLink;
-
-        // Format the tx date to check against today's date
-        let txDate = new Date(element.date);
-        let todaysDate = new Date();
 
        
             // Check to see if a resultsLink exists
-            if (entryLink) {
+            if (resultsLink) {
                 // Set href as resultsLink
-                txSection.attr("data-url", entryLink); // Add data attribute to the row with resultsLink url
+                txSection.attr("data-url", resultsLink); // Add data attribute to the row with resultsLink url
                 txSection.addClass("clickable-row-results"); // ADd clickable results row css styles
             }
 
