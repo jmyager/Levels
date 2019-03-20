@@ -91,6 +91,7 @@ function populateFilter(data) {
 
 // function to flatten the nested data
 function flattenData(data, callback) {
+    console.log(data);
     flatBatch = [];
     data.forEach(function (element) {
         for (k = 0; k < element.trails.length; k++) {
