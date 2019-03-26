@@ -156,7 +156,7 @@ module.exports = [
                 elevURL: "http://r7j8v4x4.map2.ssl.hwcdn.net/GUH_O.xml?1545499372503",
                 flowURL: "none",
                 href: "/lakes/guntersville",
-                dataSource: ["TVA"], // array of calls to make to retrieve data
+                dataSource: ["TVA", "loadAds"], // array of calls to make to retrieve data
                 resultsLink: "undefined",
                 entryLink: "",
                 adLogoSrc: "/static/assets/img/jbrodsbanner.png",
