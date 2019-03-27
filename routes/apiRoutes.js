@@ -188,7 +188,7 @@ module.exports = function (app) {
           // To retrieve Flows from USGS, we get multiple .timevalues and the variable.variableDecription 
           // value will contain "Discharge" 'Gage' for Flow or Elev data. We must determine which timevalues
           let timeSeriesLength = data.value.timeSeries.length;
-          let timeSeriesElevIndex = -1; // default value indicates no data
+          let timeSeriesElevIndex = 0; // default value indicates no data
           let timeSeriesFlowIndex = -1;
 
           for (i = 0; i < timeSeriesLength; i++) {
