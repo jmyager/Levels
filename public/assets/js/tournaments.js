@@ -91,7 +91,6 @@ function populateFilter(data) {
 
 // function to flatten the nested data
 function flattenData(data, callback) {
-    console.log(data);
     flatBatch = [];
     data.forEach(function (element) {
         for (k = 0; k < element.trails.length; k++) {
@@ -163,7 +162,7 @@ function displayFlatData(data) {
         else {
             // Check to see if a resultsLink exists
             if (resultsLink) {
-                console.log(resultsLink);
+
                 // Set href as resultsLink
                 txSection.attr("data-url", resultsLink); // Add data attribute to the row with resultsLink url
                 txSection.addClass("clickable-row-results"); // ADd clickable results row css styles
