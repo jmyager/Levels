@@ -3273,7 +3273,7 @@ module.exports = [
                 ],
                 refreshInterval: 30, //minutes
                 lastRefresh: "12/31/18", // a Date 
-                seaLevelDelta: 0.0,
+                seaLevelDelta: 428.88,
                 normalPool: 428.88,
                 lat: 39.094311,
                 long: -84.510556,
