@@ -1069,7 +1069,7 @@ module.exports = [
                         ramp: "Crosspointe",
                         state: "NC",
                         txDetail: "Qualifier 3",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-old-north-shearon-harris-nc-april-6-2019/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-old-north/"
                     },
                     {
@@ -1843,7 +1843,7 @@ module.exports = [
                         ramp: "Flat Rock",
                         state: "NC",
                         txDetail: "Qualifier 4",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-yadkin-tuckertown-nc-april-6-2019-steve-sink-tony-foster-weigh-in-19-92-lbs-bf-6-71-lbs/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-yadkin/"
                     },
                     {
@@ -1852,7 +1852,7 @@ module.exports = [
                         ramp: "Tamarac",
                         state: "NC",
                         txDetail: "Qualifier 5",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-yadkin-high-rock-nc-april-7-2019-phillips-blankenship-bust-out-a-26-69-lb-bag-to-take-1st-place-2-yadkin-wins-in-a-row-on-high-rock/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-yadkin/"
                     },
                     {
@@ -2396,7 +2396,7 @@ module.exports = [
                         ramp: "Nutbush",
                         state: "NC-VA",
                         txDetail: "FLW",
-                        resultsLink: "",
+                        resultsLink: "https://www.flwfishing.com/results/2019-04-06-kerr",
                         entryLink: "https://www.flwfishing.com/tournaments/2019-09-07-smith-mountain"
                     },
                     {
@@ -2405,7 +2405,7 @@ module.exports = [
                         ramp: "Parkway",
                         state: "VA",
                         txDetail: "FLW",
-                        resultsLink: "https://www.flwfishing.com/results/2019-04-06-kerr",
+                        resultsLink: "",
                         entryLink: "https://www.flwfishing.com/tournaments/2019-06-29-smith-mountain"
                     },
                     {
