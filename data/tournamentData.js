@@ -957,7 +957,7 @@ module.exports = [
                         ramp: "Dreher",
                         state: "SC",
                         txDetail: "Final",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-lake-murray-sc-spring-final-april-13-2019/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-lake-murray/"
                     }
                 ]
@@ -1585,7 +1585,7 @@ module.exports = [
                         ramp: "Clearwater",
                         state: "SC",
                         txDetail: "Final",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-lake-wateree-sc-spring-final-april-13-2019-brought-to-you-by-lews-academy-sports-darryl-watson-ken-mcfarland-cash-in-big-time-17-80-lbs-bf-6-32-lbs-3981-00/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-lake-wateree/"
                     }
                 ]
@@ -1642,7 +1642,7 @@ module.exports = [
                         ramp: "Clearwater",
                         state: "SC",
                         txDetail: "Open 6",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-wateree-open-april-1-2019-barry-holloman-gets-it-done-19-46-lbs-1161-00-next-wateree-open-is-may-11th-at-clearwater-cove-marina/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-lake-wateree-opens/"
                     },
                     {
@@ -1792,7 +1792,7 @@ module.exports = [
                         ramp: "Buster Boyd",
                         state: "NC-SC",
                         txDetail: "Qualifier 4",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-lake-wylie-sc-nc-april-13-2019/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-lake-wylie/"
                     },
                     {
@@ -2568,7 +2568,7 @@ module.exports = [
                         ramp: "Farrington",
                         state: "NC",
                         txDetail: "Piedmont Bass Classic",
-                        resultsLink: "",
+                        resultsLink: "http://piedmontbassclassics.com/413-19PBCResults.html",
                         entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
                     },
                     {
