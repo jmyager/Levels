@@ -86,7 +86,7 @@ $.ajax({
             // dump anything currently in the lake container, noLocation container, or template
             $('#lakeContainer').empty();
             $('#noLocation').empty();
-            lakeTemplate = `<h6>Lakes near: ${lat.toFixed(5)}, ${lon.toFixed(5)}</h6>`;
+            lakeTemplate = `<h6>Lakes near: ${lat.toFixed(2)}, ${lon.toFixed(2)}</h6>`;
             // sort by ascending distance
             closeLakes = closeLakes.sort(function (a, b) { return (a.distance - b.distance) });
             // loop through closeLakes and build the template for the page

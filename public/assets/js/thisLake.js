@@ -736,14 +736,16 @@ function dataTWDB(callback) {
 
 // Function to dynamically place advertisement on thisLake.html page
 function loadAds() {
-    if (typeof adLogoSrc !== 'undefined') {
-        $("#adLogoWell").append("<a href='" + adLogoUrl + "' target='_blank'><img class='ad-logo' src='" + adLogoSrc + "'/></a>");
-    }
+    // if (typeof adLogoSrc !== 'undefined') {
+    //     $("#adLogoWell").append("<a href='" + adLogoUrl + "' target='_blank'><img class='ad-logo' src='" + adLogoSrc + "'/></a>");
+    // }
     if (typeof adTxSrc !== 'undefined') {
-        $("#adTxWell").append("<a href='" + adTxUrl + "' target='_blank'><img class='ad-logo' src='" + adTxSrc + "'/></a>");
+        console.log(adTxUrl);
+        console.log(adTxSrc);
+        $("#adTxWell").append("<a href='" + adTxUrl + "' target='_blank'><img class='tx-banner' src='" + adTxSrc + "'/></a>");
     }
     if (typeof adCharitySrc !== 'undefined') {
-        $("#adCharityWell").append("<a href='" + adCharityUrl + "' target='_blank'><img class='ad-logo' src='" + adCharitySrc + "'/></a>");
+        $("#adCharityWell").append("<a href='" + adCharityUrl + "' target='_blank'><img class='tx-banner' src='" + adCharitySrc + "'/></a>");
     }
 }
 
@@ -831,7 +833,8 @@ $.ajax({
                     displayCurrentPageValues();
                     buildTable(displayBatch);
                 });
-            } else if (source === "loadAds") {
+            }
+            else if (source === "loadAds") {
                 loadAds();
             }
         }

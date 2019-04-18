@@ -222,13 +222,18 @@ h1, h2, h3 {
 .lake-card {
     width: 80%;
     margin: 0px auto 20px;
-    padding: 10px;
     height: auto;
+    padding: 5px;
     text-align: center;
-    color: white;
     background: rgb(0,212,255);
     background: linear-gradient(135deg, rgba(0,212,255,1) 0%, rgba(9,45,121,1) 100%);
     box-shadow: 0px 2px 4px rgba(0,0,0,0.18);
+    color: white;
+}
+
+.lake-card p {
+    color: white;
+    color: rgba(255,255,255,0.8);
 }
 
 .lake-card:hover {
@@ -237,11 +242,24 @@ h1, h2, h3 {
     transition: width .25s;
 }
 
-.lake-card h2 {
+.lake-card div {
+    color: rgb(231, 202, 202);
+    margin: auto;
+}
+
+.lake-card div * {
+    margin: 0px 0px 5px;
+}
+
+.lake-card div h2, .lake-card div h4 {
     font-weight: bold;
 }
 
-.lake-card p {
+.lake-card div h4 {
+    margin-top: 10px;
+}
+
+.lake-card div p {
     color: rgba(255,255,255,0.8);
     text-shadow: 0px 1px 2px rgba(0,0,0,0.2);
 }
@@ -589,11 +607,55 @@ h1, h2, h3 {
 
 /* Advertisements */
 /* ======================================================= */
-.ad-logo {
+#adLogoWell li {
+    list-style-type: none;
+}
+
+#adLogoWell a {
+    display: block;
+}
+
+#adLogoWell .active {
+    display: block;
+    animation: SHW 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes SHW {
+    from {
+        opacity:0
+    }
+    to {
+        opacity:1
+    }
+}
+
+#adLogoWell .inactive {
+    animation: DNTSHW 1s;
+    animation-fill-mode: both;
+    display: none;
+}
+
+@keyframes DNTSHW {
+    from {
+        opacity:1,
+    }
+    to {
+        opacity:0;
+    }
+}
+
+.ad-bnr, .tx-banner {
     width: 40%;;
     height: auto;
-    margin-bottom: 10px;
+    margin: 0px auto 10px;
 }
+
+.ad-bnr {
+    display: none;
+    opacity: 0;
+}
+
 
 /* Ad Bottom Banner Styles */
     .ad-bottom-banner {
@@ -605,11 +667,11 @@ h1, h2, h3 {
         opacity: 0; /*this style hides the banner */
     }
 
-    .ad-scroller-img {
+    /* .ad-scroller-img {
         width: 90px;
         height: 60px;
         margin-right: 20px;
-    }
+    } */
 
 /* Scrolling Banner Styles */
     #scroller {
@@ -689,13 +751,27 @@ h1, h2, h3 {
     }
 
     @media only screen and (max-width: 768px) {
-        .ad-logo {
+        .ad-bnr, .tx-banner {
             width: 60%;
         }
     }
 
     @media only screen and (max-width: 480px) {
-     .ad-logo {
+     .ad-bnr, .tx-banner {
          width: 90%;
      }
  }
+
+    @media only screen and (min-width: 571px) {
+        .lake-card {
+            padding: 10px;
+        }
+        
+        .lake-card .left {
+            flex: 2;
+        }
+
+        .lake-card .right {
+            flex: 1;
+        }
+    }

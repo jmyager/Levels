@@ -1000,6 +1000,15 @@ module.exports = function (app) {
   })
 
 
+  // This returns the sponsor file
+  app.get("/api/sponsors", function (request, response) {
+    // Import our txData from newSponsorData.js file
+    var sponsorData = require("../data/sponsorData");
+    response.json(sponsorData);
+  });
+
+
+
   // Fetch weather data
   // app.get("/api/weather", function (req, res) {
   //   getData(function (error, data) {
