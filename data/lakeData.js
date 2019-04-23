@@ -1790,7 +1790,7 @@ module.exports = [
                 entryLink: "",
                 adLogoSrc: "/static/assets/img/jsegenerac.png",
                 adLogoUrl: "http://jacksonsuperiorelectric.com/",
-                adTxSrc: "",
+                adTxSrc: "/static/assets/img/catt-oldnorth-moved.png",
                 adTxUrl: "https://www.cattteamtrail.com/divisions/catt-old-north/"
             },
             // Fontana Data is not correct for TVA. It says Fontana will be 'sluicing' util further notice. Not sure what that means.
@@ -1926,7 +1926,7 @@ module.exports = [
                 entryLink: "",
                 adLogoSrc: "/static/assets/img/jbrodsbanner.png",
                 adLogoUrl: "https://www.custombassrods.com/",
-                adTxSrc: "/static/assets/img/catt-oldnorth-jordan.png",
+                adTxSrc: "/static/assets/img/catt-oldnorth-moved.png",
                 adTxUrl: "https://www.cattteamtrail.com/divisions/catt-old-north/",
                 ramps: [{
                         rampName: "Farrington Point",
