@@ -735,19 +735,19 @@ function dataTWDB(callback) {
 }; // End of dataTWDB
 
 // Function to dynamically place advertisement on thisLake.html page
-function loadAds() {
-    // if (typeof adLogoSrc !== 'undefined') {
-    //     $("#adLogoWell").append("<a href='" + adLogoUrl + "' target='_blank'><img class='ad-logo' src='" + adLogoSrc + "'/></a>");
-    // }
-    if (typeof adTxSrc !== 'undefined') {
-        console.log(adTxUrl);
-        console.log(adTxSrc);
-        $("#adTxWell").append("<a href='" + adTxUrl + "' target='_blank'><img class='tx-banner' src='" + adTxSrc + "'/></a>");
-    }
-    if (typeof adCharitySrc !== 'undefined') {
-        $("#adCharityWell").append("<a href='" + adCharityUrl + "' target='_blank'><img class='tx-banner' src='" + adCharitySrc + "'/></a>");
-    }
-}
+// function loadAds() {
+//     // if (typeof adLogoSrc !== 'undefined') {
+//     //     $("#adLogoWell").append("<a href='" + adLogoUrl + "' target='_blank'><img class='ad-logo' src='" + adLogoSrc + "'/></a>");
+//     // }
+//     if (typeof adTxSrc !== 'undefined') {
+//         console.log(adTxUrl);
+//         console.log(adTxSrc);
+//         $("#adTxWell").append("<a href='" + adTxUrl + "' target='_blank'><img class='tx-banner' src='" + adTxSrc + "'/></a>");
+//     }
+//     if (typeof adCharitySrc !== 'undefined') {
+//         $("#adCharityWell").append("<a href='" + adCharityUrl + "' target='_blank'><img class='tx-banner' src='" + adCharitySrc + "'/></a>");
+//     }
+// }
 
 
 // User clicked on Tournaments Button on Lake page
@@ -834,9 +834,9 @@ $.ajax({
                     buildTable(displayBatch);
                 });
             }
-            else if (source === "loadAds") {
-                loadAds();
-            }
+            // else if (source === "loadAds") {
+            //     loadAds();
+            // }
         }
     })
 
