@@ -57,25 +57,6 @@ $.ajax({
                     }
                 }
             });
-
-            // var slideIndex2 = 0;
-            // var y = document.getElementsByClassName("ad-tx");
-            // y[0].classList.add("active");
-            // carousel2();
-
-            // function carousel2() {
-            //     var j;
-            //     var y = document.getElementsByClassName("ad-tx");
-            //     for (j = 0; j < y.length; j++) {
-            //         y[j].classList.remove("active");
-            //         y[j].classList.add("inactive");
-            //     }
-            //     slideIndex2++;
-            //     if (slideIndex2 > y.length) { slideIndex2 = 1 }
-            //     y[slideIndex2 - 1].classList.remove("inactive");
-            //     y[slideIndex2 - 1].classList.add("active");
-            //     setTimeout(carousel2, 3500); // Change image every 2 seconds
-            // }
         }
 
         // slideshow carousel function
