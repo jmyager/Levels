@@ -44,7 +44,7 @@ module.exports = [
     {
         sponsor: "CATT Jordan 5-18",
         href: "",
-        src: "/static/assets/img/tournament-banners/catt-oldnorth-jordan-5-18.png",
+        src: "/static/assets/img/tournament-banners/catt-oldnorth-jordan-5-18-v2.png",
         location: ["jordan"],
         type: "tournament"
     },
