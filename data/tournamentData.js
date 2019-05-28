@@ -165,105 +165,105 @@ module.exports = [
     {
         organization: "Alabama Bass Trail",
         trails: [{
-            trail: "North",
-            tournaments: [{
-                    date: "2019-02-23",
-                    lake: "Smith",
-                    ramp: "Smith Dam",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/lsl-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/lsl-overview/"
-                },
-                {
-                    date: "2019-03-23",
-                    lake: "Wheeler",
-                    ramp: "Ingalls Harbor",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/wl-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/wl-overview/"
-                },
-                {
-                    date: "2019-04-27",
-                    lake: "Weiss",
-                    ramp: "Leesburg",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/wel-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/wel-overview/"
-                },
-                {
-                    date: "2019-05-11",
-                    lake: "Pickwick",
-                    ramp: "McFarland",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/pl-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/pl-overview/"
-                },
-                {
-                    date: "2019-06-08",
-                    lake: "Neely Henry",
-                    ramp: "Coosa Landing",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/nhl-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/nhl-overview/"
-                }
-            ]
-        },
-         {
-            trail: "South",
-            tournaments: [
-                {
-                    date: "2019-02-16",
-                    lake: "Martin",
-                    ramp: "Wind Creek SP",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/lm-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/lm-overview/"
-                },
-                {
-                    date: "2019-03-30",
-                    lake: "Jordan",
-                    ramp: "Wetumpka",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/jl-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/jl-overview/"
-                },
-                {
-                    date: "2019-04-27",
-                    lake: "Alabama River",
-                    ramp: "Cooter's Pond",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/ar-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/ar-overview/"
-                },
-                {
-                    date: "2019-05-18",
-                    lake: "Lay",
-                    ramp: "Beeswax",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/ll-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/ll-overview/"
-                },
-                {
-                    date: "2019-06-15",
-                    lake: "Eufaula",
-                    ramp: "Lakepoint SP",
-                    state: "AL",
-                    txDetail: "",
-                    resultsLink: "https://www.alabamabasstrail.org/tournament-series/le-results/",
-                    entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/le-overview/"
-                }
+                trail: "North",
+                tournaments: [{
+                        date: "2019-02-23",
+                        lake: "Smith",
+                        ramp: "Smith Dam",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/lsl-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/lsl-overview/"
+                    },
+                    {
+                        date: "2019-03-23",
+                        lake: "Wheeler",
+                        ramp: "Ingalls Harbor",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/wl-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/wl-overview/"
+                    },
+                    {
+                        date: "2019-04-27",
+                        lake: "Weiss",
+                        ramp: "Leesburg",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/wel-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/wel-overview/"
+                    },
+                    {
+                        date: "2019-05-11",
+                        lake: "Pickwick",
+                        ramp: "McFarland",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/pl-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/pl-overview/"
+                    },
+                    {
+                        date: "2019-06-08",
+                        lake: "Neely Henry",
+                        ramp: "Coosa Landing",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/nhl-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/north-division/nhl-overview/"
+                    }
+                ]
+            },
+            {
+                trail: "South",
+                tournaments: [{
+                        date: "2019-02-16",
+                        lake: "Martin",
+                        ramp: "Wind Creek SP",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/lm-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/lm-overview/"
+                    },
+                    {
+                        date: "2019-03-30",
+                        lake: "Jordan",
+                        ramp: "Wetumpka",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/jl-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/jl-overview/"
+                    },
+                    {
+                        date: "2019-04-27",
+                        lake: "Alabama River",
+                        ramp: "Cooter's Pond",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/ar-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/ar-overview/"
+                    },
+                    {
+                        date: "2019-05-18",
+                        lake: "Lay",
+                        ramp: "Beeswax",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/ll-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/ll-overview/"
+                    },
+                    {
+                        date: "2019-06-15",
+                        lake: "Eufaula",
+                        ramp: "Lakepoint SP",
+                        state: "AL",
+                        txDetail: "",
+                        resultsLink: "https://www.alabamabasstrail.org/tournament-series/le-results/",
+                        entryLink: "https://www.alabamabasstrail.org/tournament-series/south-division/le-overview/"
+                    }
 
-            ]
-        }]
+                ]
+            }
+        ]
     },
     {
         organization: "Anglers",
@@ -336,7 +336,7 @@ module.exports = [
     {
         organization: "Bojangles",
         trails: [{
-            trail: "Wow",
+            trail: "Pro-Am",
             tournaments: [
 
                 {
@@ -345,7 +345,7 @@ module.exports = [
                     ramp: "Summit",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -354,7 +354,7 @@ module.exports = [
                     ramp: "Wilmington",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -363,7 +363,7 @@ module.exports = [
                     ramp: "Edenton",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -372,7 +372,7 @@ module.exports = [
                     ramp: "Flemingtown",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -381,7 +381,7 @@ module.exports = [
                     ramp: "Plymouth",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -390,7 +390,7 @@ module.exports = [
                     ramp: "New Bern",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -399,7 +399,7 @@ module.exports = [
                     ramp: "Plymouth",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 },
                 {
@@ -408,7 +408,7 @@ module.exports = [
                     ramp: "TBD",
                     state: "NC",
                     txDetail: "2 Day Championship Div 1",
-                    resultsLink: "",
+                    resultsLink: "http://bojanglesproam.com/Schedule.html",
                     entryLink: "http://bojanglesproam.com/"
                 }
             ]
@@ -1181,7 +1181,7 @@ module.exports = [
                         ramp: "Farrington",
                         state: "NC",
                         txDetail: "Qualifier 5",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-old-north-jordan-lake-nc-may-18-2019-scott-smith-tony-woodard-smack-em-28-12-lbs-7-43-bf-with-only-32-teams-they-collected-2717-00/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-old-north/"
                     },
                     {
@@ -1547,7 +1547,7 @@ module.exports = [
                         ramp: "Bucksport",
                         state: "SC",
                         txDetail: "Qualifier 1",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-waccamaw-river-sc-may-18-2019-britt-brown-danny-martin-win-with-17-48-lbs-7-09-lb-bf-1553-00/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-waccamaw-river/"
                     },
                     {
@@ -1973,7 +1973,7 @@ module.exports = [
                         ramp: "Tamarac",
                         state: "NC",
                         txDetail: "Qualifier 7",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/tournament-results/tournament-results-yadkin-high-rock-lake-nc-may-18-2019-tony-brewer-scott-faulkner-weigh-in-23-63-lbs-derek-livingston-andrew-wallace-win-the-2019-yadkin-spring-points-will-fish-the-final-fr/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-yadkin/"
                     },
                     {
@@ -2238,7 +2238,7 @@ module.exports = [
                     ramp: "Lawsons Creek",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "https://www.ncbasschallenge.com/tournament-results/vann-lewis-win-big-on-the-neuse/",
                     entryLink: "https://www.ncbasschallenge.com/2019-tournament-schedule/"
                 },
                 {
@@ -3381,8 +3381,8 @@ module.exports = [
                         ramp: "Green Pond",
                         state: "SC",
                         txDetail: "FLW",
-                        resultsLink: "",
-                        entryLink: ""
+                        resultsLink: "https://www.flwfishing.com/results/2019-02-16-hartwell",
+                        entryLink: "https://www.flwfishing.com/tournaments/2019-02-16-hartwell"
                     },
                     {
                         date: "2019-03-09",
@@ -3390,8 +3390,8 @@ module.exports = [
                         ramp: "John C Land",
                         state: "SC",
                         txDetail: "FLW",
-                        resultsLink: "",
-                        entryLink: ""
+                        resultsLink: "https://www.flwfishing.com/results/2019-03-09-santee-cooper",
+                        entryLink: "https://www.flwfishing.com/tournaments/2019-03-09-santee-cooper"
                     },
                     {
                         date: "2019-03-30",
@@ -3399,8 +3399,8 @@ module.exports = [
                         ramp: "Wildwood Park",
                         state: "SC",
                         txDetail: "FLW",
-                        resultsLink: "",
-                        entryLink: ""
+                        resultsLink: "https://www.flwfishing.com/results/2019-03-30-clarks-hill",
+                        entryLink: "https://www.flwfishing.com/tournaments/2019-03-30-clarks-hill"
                     },
                     {
                         date: "2019-05-18",
@@ -3408,8 +3408,8 @@ module.exports = [
                         ramp: "Buster Boyd",
                         state: "SC",
                         txDetail: "FLW",
-                        resultsLink: "",
-                        entryLink: ""
+                        resultsLink: "https://www.flwfishing.com/results/2019-05-18-wylie",
+                        entryLink: "https://www.flwfishing.com/tournaments/2019-05-18-wylie"
                     },
                     {
                         date: "2019-09-28",
@@ -3417,8 +3417,8 @@ module.exports = [
                         ramp: "Green Pond",
                         state: "SC",
                         txDetail: "FLW",
-                        resultsLink: "",
-                        entryLink: ""
+                        resultsLink: "https://www.flwfishing.com/results/2019-09-28-hartwell",
+                        entryLink: "https://www.flwfishing.com/tournaments/2019-09-28-hartwell"
                     }
                 ]
             }, {
@@ -3546,7 +3546,7 @@ module.exports = [
                         ramp: "Ebenezer",
                         state: "NC",
                         txDetail: "T4",
-                        resultsLink: "",
+                        resultsLink: "https://www.fomntt.com/pageflow.cfm?callpage=results&schid=5642&getyear=2019",
                         entryLink: "https://www.fomntt.com/pageflow.cfm?callpage=divisioninfo&divid=32&getyear=2019"
                     },
                     {
@@ -3561,6 +3561,150 @@ module.exports = [
                 ]
             }
         ]
+    },
+    {
+        organization: "Harris Wildcat",
+        trails: [{
+            trail: "Weds Night (5-9pm)",
+            tournaments: [
+
+                {
+                    date: "2019-05-22",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-05-29",
+                    lake: "Harris",
+                    ramp: "Cross Pointe",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-06-05",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-06-12",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-06-19",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-06-26",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-07-03",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-07-10",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-07-17",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-07-24",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-07-31",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-08-07",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-08-14",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-08-21",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                },
+                {
+                    date: "2019-08-28",
+                    lake: "Harris",
+                    ramp: "Crosspoint",
+                    state: "NC",
+                    txDetail: "",
+                    resultsLink: "",
+                    entryLink: ""
+                }
+            ]
+        }]
     },
     {
         organization: "PBC",
