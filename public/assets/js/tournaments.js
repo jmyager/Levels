@@ -94,6 +94,9 @@ function flattenData(data, callback) {
     flatBatch = [];
     data.forEach(function (element) {
         for (k = 0; k < element.trails.length; k++) {
+            console.log(element.organization);
+            console.log(element.trails[k]);
+            console.log(element.trails[k].tournaments);
             for (l = 0; l < element.trails[k].tournaments.length; l++) {
                 // Format the tx date to check against today's date
                 let txDate = new Date(element.trails[k].tournaments[l].date);
@@ -162,7 +165,7 @@ function displayFlatData(data) {
         else {
             // Check to see if a resultsLink exists
             if (resultsLink) {
-
+                console.log(resultsLink);
                 // Set href as resultsLink
                 txSection.attr("data-url", resultsLink); // Add data attribute to the row with resultsLink url
                 txSection.addClass("clickable-row-results"); // ADd clickable results row css styles

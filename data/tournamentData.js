@@ -706,7 +706,7 @@ module.exports = [
                         ramp: "Summit",
                         state: "NC",
                         txDetail: "Qualifier 3",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-lake-gaston-nc-va-june-30-2019-ivan-janet-morris-smoke-the-field-20-51-lbs-bf-5-49-lbs-1725-00/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-lake-gaston/"
                     },
                     {
@@ -1250,7 +1250,7 @@ module.exports = [
                         ramp: "Farrington",
                         state: "NC",
                         txDetail: "Final",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-old-north-final-jordan-lake-nc-june-29-2019-josh-hooks-jaimie-fajardo-take-home-5500-00/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-old-north/"
                     }
                 ]
@@ -1394,7 +1394,7 @@ module.exports = [
                         ramp: "Hardeeville",
                         state: "SC",
                         txDetail: "Qualifier 1",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-savannah-river-ga-june-29-2019-christopher-chavis-nick-hager-take-1st-place-16-20-lbs-bf-5-92-lbs-next-savannah-river-catt-is-july-13-at-stokes-bluff/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-savannah-river/"
                     },
                     {
@@ -1739,7 +1739,7 @@ module.exports = [
                         ramp: "Clearwater",
                         state: "SC",
                         txDetail: "Q6",
-                        resultsLink: "",
+                        resultsLink: "https://www.cattteamtrail.com/news/tournament-results-wateree-june-29-2019-chad-gainey-mack-kitchens-bring-in-18-29-lbs-take-home-1000-00-next-last-wateree-summer-catt-is-july-13th/",
                         entryLink: "https://www.cattteamtrail.com/divisions/catt-lake-wateree/"
                     },
                     {
@@ -3778,7 +3778,7 @@ module.exports = [
 
                 {
                     date: "2019-05-22",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3787,7 +3787,7 @@ module.exports = [
                 },
                 {
                     date: "2019-05-29",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3805,7 +3805,7 @@ module.exports = [
                 },
                 {
                     date: "2019-06-12",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3814,7 +3814,7 @@ module.exports = [
                 },
                 {
                     date: "2019-06-19",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3823,25 +3823,16 @@ module.exports = [
                 },
                 {
                     date: "2019-06-26",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
-                    resultsLink: "",
-                    entryLink: "https://www.facebook.com/Harris-Lake-Wildcats-119889178084587/?__tn__=kC-R&eid=ARC3zfi-dxLiD0lLFBGDkcYdJTxccVvTomptRqU8jikCSL4aeiEvDeqLvPNZkbHOmA_r1hV_vryp8eZ5&hc_ref=ARTE51QVx1wMKOwFFXk-pZbvAqPIDqs2kizAFekHgu9Yyi8ZqoRkMPtILbPavRyXD00&__xts__[0]=68.ARAOvBR9JJ6v2dZw9RItPOArR0XJ1wYfW2FocwKOubPxgO7kUJmqavgrs2uKEW0-ypFQ_5zX9ZnVUktNxf6B5WYcNWUzKPWTFJBwdao3vdi7swV0NCyOCYmej5TuntPWv9N-1ICqeW7koify-AQO4ZLhDaPQXXN8hoUOJSj7ZbrdYxD-IkuWkAGYwQMiBUVjU2uEW2G_dzmIOWp_zvr0lU6TYwQursVl5g7XN-B0mtkHKF7pQUaTOZpBl3I1Y_6W9svZPctHtmzdrq5p0hzVncujPhYRSOlBPbfHOhYW803jF8FYBN9931OvbUT7LJVmyjR-x_7lX3aJyDqAuqYMz94EPQ"
-                },
-                {
-                    date: "2019-07-03",
-                    lake: "Harris",
-                    ramp: "Crosspoint",
-                    state: "NC",
-                    txDetail: "",
-                    resultsLink: "",
+                    resultsLink: "https://www.facebook.com/119889178084587/photos/a.1303365486403611/2754502801289865/?type=3&eid=ARDERMZ9vGarXNReLR9SmZXyZOsSw79XTvje3Rjo7uUQ7U_KFoTrQVoY291jzc8_IiaoD3OfHxOXOsd_&__tn__=EHH-R",
                     entryLink: "https://www.facebook.com/Harris-Lake-Wildcats-119889178084587/?__tn__=kC-R&eid=ARC3zfi-dxLiD0lLFBGDkcYdJTxccVvTomptRqU8jikCSL4aeiEvDeqLvPNZkbHOmA_r1hV_vryp8eZ5&hc_ref=ARTE51QVx1wMKOwFFXk-pZbvAqPIDqs2kizAFekHgu9Yyi8ZqoRkMPtILbPavRyXD00&__xts__[0]=68.ARAOvBR9JJ6v2dZw9RItPOArR0XJ1wYfW2FocwKOubPxgO7kUJmqavgrs2uKEW0-ypFQ_5zX9ZnVUktNxf6B5WYcNWUzKPWTFJBwdao3vdi7swV0NCyOCYmej5TuntPWv9N-1ICqeW7koify-AQO4ZLhDaPQXXN8hoUOJSj7ZbrdYxD-IkuWkAGYwQMiBUVjU2uEW2G_dzmIOWp_zvr0lU6TYwQursVl5g7XN-B0mtkHKF7pQUaTOZpBl3I1Y_6W9svZPctHtmzdrq5p0hzVncujPhYRSOlBPbfHOhYW803jF8FYBN9931OvbUT7LJVmyjR-x_7lX3aJyDqAuqYMz94EPQ"
                 },
                 {
                     date: "2019-07-10",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3850,7 +3841,7 @@ module.exports = [
                 },
                 {
                     date: "2019-07-17",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3859,7 +3850,7 @@ module.exports = [
                 },
                 {
                     date: "2019-07-24",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3868,7 +3859,7 @@ module.exports = [
                 },
                 {
                     date: "2019-07-31",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3877,7 +3868,7 @@ module.exports = [
                 },
                 {
                     date: "2019-08-07",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3886,7 +3877,7 @@ module.exports = [
                 },
                 {
                     date: "2019-08-14",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3895,7 +3886,7 @@ module.exports = [
                 },
                 {
                     date: "2019-08-21",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3904,7 +3895,7 @@ module.exports = [
                 },
                 {
                     date: "2019-08-28",
-                    lake: "Harris",
+                    lake: "Shearon Harris",
                     ramp: "Crosspoint",
                     state: "NC",
                     txDetail: "",
@@ -3916,84 +3907,7 @@ module.exports = [
     },
     {
         organization: "PBC",
-        trails: [{
-                trail: "Spring Team",
-                tournaments: [
-
-                    {
-                        date: "2019-03-02",
-                        lake: "Harris",
-                        ramp: "Crosspoint",
-                        state: "NC",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/32-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-03-16",
-                        lake: "Falls",
-                        ramp: "Ledge Rock",
-                        state: "NC",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/316-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-03-30",
-                        lake: "Harris",
-                        ramp: "Crosspoint",
-                        state: "NC",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/330-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-04-13",
-                        lake: "Jordan",
-                        ramp: "Farrington",
-                        state: "NC",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/413-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-04-27",
-                        lake: "Kerr",
-                        ramp: "Flemingtown",
-                        state: "NC-VA",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/427-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-05-11",
-                        lake: "Jordan",
-                        ramp: "Farrington",
-                        state: "NC",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/511-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-06-01",
-                        lake: "Falls",
-                        ramp: "Ledge Rock",
-                        state: "NC",
-                        txDetail: "Piedmont Bass Classic",
-                        resultsLink: "http://piedmontbassclassics.com/61-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    },
-                    {
-                        date: "2019-06-15",
-                        lake: "Jordan",
-                        ramp: "Farrington",
-                        state: "NC",
-                        txDetail: "Championship",
-                        resultsLink: "http://piedmontbassclassics.com/615-19PBCResults.html",
-                        entryLink: "http://piedmontbassclassics.com/2019PBC10KSpringTrailMainPage.html"
-                    }
-                ]
-            },
+        trails: [
             {
                 trail: "Cashion",
                 tournaments: [{
@@ -4049,6 +3963,92 @@ module.exports = [
                         txDetail: "Piedmont Bass Classic",
                         resultsLink: "http://piedmontbassclassics.com/518-19Results.html",
                         entryLink: "http://piedmontbassclassics.com/2019CashionRodsHartsCustomSetsSpringTrailMainPage.html"
+                    }
+                ]
+            },{
+                trail: "End of Year",
+                tournaments: [
+
+                    {
+                        date: "2019-07-13",
+                        lake: "Falls",
+                        ramp: "Ledge Rock",
+                        state: "NC",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/713-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-07-27",
+                        lake: "Jordan",
+                        ramp: "Farrington",
+                        state: "NC",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/727-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-08-10",
+                        lake: "Falls",
+                        ramp: "Ledge Rock",
+                        state: "NC",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/810-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-08-24",
+                        lake: "Jordan",
+                        ramp: "Farrington",
+                        state: "NC",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/824-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-09-07",
+                        lake: "Falls",
+                        ramp: "Ledge Rock",
+                        state: "NC",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/97-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-09-21",
+                        lake: "Kerr",
+                        ramp: "Flemington",
+                        state: "NC-VA",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/921-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-10-05",
+                        lake: "Shearon Harris",
+                        ramp: "Crosspointe",
+                        state: "NC",
+                        txDetail: "Piedmont Bass Classic",
+                        resultsLink: "http://piedmontbassclassics.com/105-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-10-19",
+                        lake: "Falls",
+                        ramp: "Ledge Rock",
+                        state: "NC",
+                        txDetail: "Championship",
+                        resultsLink: "http://piedmontbassclassics.com/1019-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
+                    },
+                    {
+                        date: "2019-10-26",
+                        lake: "Jordan",
+                        ramp: "Farrington",
+                        state: "NC",
+                        txDetail: "Championship",
+                        resultsLink: "http://piedmontbassclassics.com/1026819-19PBCResults.html",
+                        entryLink: "http://piedmontbassclassics.com/2019CashionEOYMainPage.html"
                     }
                 ]
             },

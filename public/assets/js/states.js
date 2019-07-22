@@ -56,6 +56,10 @@ const states = [{
         id: "la"
     },
     {
+        state: "Michigan",
+        id: "mi"
+    },
+    {
         state: "Minnesota",
         id: "mn"
     },
@@ -70,6 +74,10 @@ const states = [{
     {
         state: "Nevada",
         id: "nv"
+    },
+    {
+        state: "New Jersey",
+        id: "nj"
     },
     {
         state: "New Mexico",
@@ -105,12 +113,20 @@ const states = [{
         id: "sc"
     },
     {
+        state: "South Dakota",
+        id: "sd"
+    },
+    {
         state: "Tennessee",
         id: "tn"
     },
     {
         state: "Texas",
         id: "tx"
+    },
+    {
+        state: "Utah",
+        id: "ut"
     },
     {
         state: "Virginia",
@@ -126,6 +142,10 @@ const states = [{
     }
 ]
 
+// Show sponsors
+$('#adLogoWell').show();
+
+
 // Dynamically create options in our dropdown
 for (var i = 0; i < states.length; i++) {
     var stateOption = $("<option>");
@@ -139,22 +159,22 @@ let currentURL = window.location.href;
 let state = decodeURI(currentURL.split("/")[4]); // Reduce the string to just our state name
 let url = window.location.origin + "/api/states/" + state; // Build url for ajax call
 
-$.ajax({
-        url: url, // /api/states/:state
+    $.ajax({
+        url: "/api/find-one-state",
         method: "GET",
         data: {
-            state: state
+            stateName: state
         }
     })
     .then(function (data) {
         console.log(data);
-        $("#stateName").append(data.state);
-        for (var i = 0; i < data.lakes.length; i++) {
+        $("#stateName").append(state);
+        for (var i = 0; i < data.length; i++) {
             var row = $(`
             <tr>
             <td class="text-left">
-                <a class="lake-link" href="${data.lakes[i].href}">
-                    <h5>${data.lakes[i].bodyOfWater}</h5>
+                <a class="lake-link" href="${data[i].href}">
+                    <h5>${data[i].bodyOfWater}</h5>
                 </a>
             </td>
         </tr>`)

@@ -8,22 +8,17 @@
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77195420-4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-77195420-4');
+  <script type="text/javascript">
+      if (document.location.hostname.search("basssavvy.com") !== -1) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', 'UA-77195420-4');
+      } else {
+          console.log("GA Tag not in use for development environment.");
+      }
   </script>
 
-  <!-- Google Adsense
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-1075035015384602",
-          enable_page_level_ads: true
-      });
-  </script> -->
 
 
   <!-- Latest compiled and minified CSS -->
@@ -38,8 +33,7 @@
   <div class="nav-color-splash"></div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <a class="navbar-brand" href="/">
-      <!-- <h2>Bass<span class="brand-savvy">Savvy</span></h2> -->
-      <img style="width: 120px; margin-right: 20px; margin-left: 10px;" src="/static/assets/img/basssavvy-logo.png">
+      <img style="width: 120px; margin-right: 20px; margin-left: 10px;" src="https://i.imgur.com/dZb2jvZ.png">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +83,8 @@
 
   <div class="container-fluid text-center">
 
-    <div id="adLogoWell"></div>
+    <div id="adLogoWell">
+    </div>
 
     <div class="current-wrapper">
       <h1 class="current-header-title"><span id="lakeTitle"></span></h1>
@@ -120,6 +115,10 @@
       <h3><b>Average Daily Flow (cfs)</b></h3>
       <canvas id="myFlowChart"></canvas>
     </div>
+    <div class="chart-container" id="baroChart" style="display:none">
+      <h3><b>Barometric Pressure</b></h3>
+      <canvas id="myBaroChart"></canvas>
+    </div>
 
     <h3><b>Historical Data</b></h3>
     <table class="table thead-dark table-striped mx-auto">
@@ -127,8 +126,8 @@
         <tr>
           <th scope="col">Date</th>
           <th scope="col">Time</th>
-          <th scope="col">Level</th>
-          <th scope="col">Flow</th>
+          <th scope="col">Level (ft MSL)</th>
+          <th scope="col">Flow (cfs)</th>
         </tr>
       </thead>
       <tbody id="lakeSection">
@@ -138,14 +137,14 @@
   </div>
 
   <!-- Bottom Scrolling Ad Banner -->
-  <div class="ad-bottom-banner">
+  <!-- <div class="ad-bottom-banner">
     <div id="scroller">
       <div class="innerScrollArea">
         <ul id="adScrollerBottom">
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

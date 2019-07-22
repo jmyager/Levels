@@ -32,12 +32,12 @@ const states = [{
         id: "ga"
     },
     {
-        state: "Indiana",
-        id: "in"
-    },
-    {
         state: "Illinois",
         id: "il"
+    },
+    {
+        state: "Indiana",
+        id: "in"
     },
     {
         state: "Iowa",
@@ -56,6 +56,10 @@ const states = [{
         id: "la"
     },
     {
+        state: "Michigan",
+        id: "mi"
+    },
+    {
         state: "Minnesota",
         id: "mn"
     },
@@ -70,6 +74,10 @@ const states = [{
     {
         state: "Nevada",
         id: "nv"
+    },
+    {
+        state: "New Jersey",
+        id: "nj"
     },
     {
         state: "New Mexico",
@@ -104,12 +112,20 @@ const states = [{
         id: "sc"
     },
     {
+        state: "South Dakota",
+        id: "sd"
+    },
+    {
         state: "Tennessee",
         id: "tn"
     },
     {
         state: "Texas",
         id: "tx"
+    },
+    {
+        state: "Utah",
+        id: "ut"
     },
     {
         state: "Virginia",
@@ -124,6 +140,10 @@ const states = [{
         id: "wi"
     }
 ]
+
+// show sponsors
+$('#adLogoWell').show();
+
 
 // Dynamically create options in our dropdown
 for (var i = 0; i < states.length; i++) {

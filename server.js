@@ -2,19 +2,14 @@
 // DEPENDENCIES
 // Series of npm packages that we will use to give our server useful functionality
 // ==============================================================================
-
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
-const mongoose = require("mongoose");
-
 
 // ==============================================================================
 // EXPRESS CONFIGURATION
 // This sets up the basic properties for our express server
 // ==============================================================================
-
-
 
 
 // Tells node that we are creating an "express" server
@@ -34,6 +29,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "/public")));
 app.use('/static', express.static(path.join(__dirname, '/public')))
+// Handle 404
+// app.use(function(req, res) {
+//   res.status(404).send("404: Page not Found");
+// });
+
+// Handle 500
+app.use(function(error, req, res, next) {
+  res.status(500).send("500: Internal Server Error");
+});
 
 // ================================================================================
 // ROUTER
@@ -52,3 +56,7 @@ require("./routes/htmlRoutes")(app);
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
+
+
+
+

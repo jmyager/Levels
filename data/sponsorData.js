@@ -56,7 +56,7 @@ module.exports = [
     {
         sponsor: "CATT Jordan 5-18",
         href: "",
-        src: "/static/assets/img/tournament-banners/catt-oldnorth-jordan-5-18-v2.png",
+        src: "/static/assets/img/tournament-banners/catt-oldnorth-jordan-5-18.png",
         location: ["jordan"],
         type: "tournament",
         startDate: "2019-01-01T00:00:00.0Z",
@@ -65,7 +65,7 @@ module.exports = [
     {
         sponsor: "CATT Kerr 6-8",
         href: "",
-        src: "/static/assets/img/tournament-banners/catt-oldnorth-kerr-6-8-v2.png",
+        src: "/static/assets/img/tournament-banners/catt-oldnorth-kerr-6-8.png",
         location: ["kerr"],
         type: "tournament",
         startDate: "2019-01-01T00:00:00.0Z",
@@ -74,7 +74,7 @@ module.exports = [
     {
         sponsor: "CATT Jordan 6-29",
         href: "",
-        src: "/static/assets/img/tournament-banners/catt-oldnorth-jordan-6-29-v2.png",
+        src: "/static/assets/img/tournament-banners/catt-oldnorth-jordan-6-29.png",
         location: ["jordan"],
         type: "tournament",
         startDate: "2019-01-01T00:00:00.0Z",

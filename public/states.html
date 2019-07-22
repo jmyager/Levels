@@ -7,22 +7,16 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77195420-4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-77195420-4');
+    <script type="text/javascript">
+        if (document.location.hostname.search("basssavvy.com") !== -1) {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-77195420-4');
+        } else {
+            console.log("GA Tag not in use for development environment.");
+        }
     </script>
-
-    <!-- Google Adsense
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-1075035015384602",
-            enable_page_level_ads: true
-        });
-    </script> -->
 
 
     <!-- Latest compiled and minified CSS -->
@@ -38,9 +32,9 @@
     <div class="nav-color-splash"></div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <a class="navbar-brand" href="/">
-            <!-- <h2>Bass<span class="brand-savvy">Savvy</span></h2> -->
-            <img style="width: 120px; margin-right: 20px; margin-left: 10px;" src="assets/img/basssavvy-logo.png">
+            <img style="width: 120px; margin-right: 20px; margin-left: 10px;" src="https://i.imgur.com/dZb2jvZ.png">
         </a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -98,14 +92,13 @@
             </select>
             <button class="btn btn-success btn-state-submit" id="stateSubmit">View</button>
         </div>
+        <div id="adLogoWell"></div>
         <div class="state-container">
             <h1 class="state-title" id="stateName"></h1>
             <table class="table lake-table table-hover" id="lakeTable">
             </table>
         </div>
     </div>
-
-   
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -116,6 +109,8 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="/static/assets/js/states.js"></script>
+    <script type="text/javascript" src="/static/assets/js/sponsor.js"></script>
+
 
 </body>
 
